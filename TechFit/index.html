@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academia TechFit</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom align-items-center">
+        <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-decoration-none">
+            <img src="logo.png" alt="Logo TechFit">
+        </a>
+
+        <nav>
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                <a href="#sobre" class="nav-link">Sobre</a>
+                </li>
+                <li class="nav-item">
+                <a href="#aulas" class="nav-link">Aulas Coletivas</a>
+                </li>
+                <li class="nav-item">
+                <a href="#horarios" class="nav-link">Horários</a>
+                </li>
+                <li class="nav-item">
+                <a href="#faq" class="nav-link">Perguntas Frequentes</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="inicial">
+        <div class="inicial-content">
+            <div class="inicial-texto">
+                <h1>Sua melhor <br>versão <br>começa <br>aqui!</h1>
+            </div>
+            <img src="celular.png" class="inicial-img">
+        </div>
+    </div>
+
+
+
+    
+    <div class="agendamento-aulas">
+    <h2>Aulas Coletivas</h2>
+    <p>Participe de nossas aulas coletivas e melhore sua saúde com atividades divertidas e motivadoras.</p>
+        <div class="galeria">
+            <div class="card">
+                <img src="capoeira.jpg" alt="Capoeira">
+                <h3>Capoeira</h3>
+                <p>Arte brasileira que mistura luta, música e dança, promovendo agilidade e resistência.</p>
+            </div>
+            <div class="card">
+                <img src="zumba.jpg" alt="Zumba">
+                <h3>Zumba</h3>
+                <p>Aula de dança animada que combina ritmos latinos com exercícios aeróbicos.</p>
+            </div>
+            <div class="card">
+                <img src="sanda.jpg" alt="Sanda">
+                <h3>Sanda</h3>
+                <p>Arte marcial chinesa que mistura socos, chutes e técnicas de queda.</p>
+            </div>
+            <div class="card">
+                <img src="yoga.webp" alt="Yoga">
+                <h3>Yoga</h3>
+                <p>Prática que combina posturas, respiração e relaxamento para equilíbrio corpo-mente.</p>
+            </div>
+            <div class="card">
+                <img src="muay tai.jpg" alt="Muay Thai">
+                <h3>Muay Thai</h3>
+                <p>Arte marcial tailandesa conhecida como a “luta das oito armas”, excelente para condicionamento.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="tabela-horarios">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Modalidade</th>
+                    <th scope="col">Horários</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Capoeira</td>
+                    <td>Segunda - 16:30 <br>Sexta - 16:00</td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Zumba</td>
+                    <td>Terça - 13:40 <br>Quinta - 14:00</td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Sanda</td>
+                    <td>Terça - 17:00 <br>Quinta - 18:00</td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Yoga</td>
+                    <td>Segunda - 14:00 <br>Quinta - 15:00</td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Muay Tai</td>
+                    <td>Quarta - 19:00 <br>Sexta - 19:00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="agendar">
+        <input type="text" placeholder="Nome:">
+        <input type="text" placeholder="E-mail:">
+        <select name="modalodade" id="modalidade">
+            <option value="" disabled selected>Modalodade</option>
+            <option value="capoeira">Capoeira</option>
+            <option value="zumba">Zumba</option>
+            <option value="sanda">Sanda</option>
+            <option value="yoga">Yoga</option>
+            <option value="muaythai">Muay Thai</option>
+        </select>
+        <select name="horario" id="horario">
+            <option value="" disabled selected>Horários</option>
+        </select>
+        <button onclick="agendar()">Agendar</button>
+    </div>
+
+
+    <script src="script.js"></script>
+</body>
+</html>
