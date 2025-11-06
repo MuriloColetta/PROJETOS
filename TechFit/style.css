@@ -1,0 +1,452 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: white;
+    text-align: justify;
+}
+
+header {
+    background-color: black;
+    padding: 10px 0;
+    position: sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+}
+
+header img {
+    width: 170px;
+    height: auto;
+    margin-left: 20px;
+}
+
+header ul {
+    justify-content: end;
+    gap: 20px;
+    padding-right: 10px;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 30px;
+}
+
+nav a {
+    color: red !important;
+    text-decoration: none;
+    display: flex;
+    font-weight: 550;
+    justify-items: right;
+}
+
+.inicial {
+    background: url('IMG/tela-inicial.png') no-repeat center center/cover;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: justify;
+    position: relative;
+    color: white;
+}
+
+.inicial::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.inicial h1 {
+    padding: 70px;
+    font-size: 50px;
+    font-weight: bold;
+    z-index: 2;
+}
+
+.bandeira {
+  background-color: red;
+  color: white;
+  display: inline-flex;
+  padding: 10px 30px;
+  transform: skew(-30deg);
+  margin-bottom: 20px;
+}
+
+.bandeira h1, .bandeira h2 {
+  transform: skew(30deg);
+  margin: 0;
+  font-size: 2.5em;
+}
+
+.planos {
+    background-color: rgb(22, 22, 22);
+    padding: 40px;
+    gap: 40px;
+}
+
+.planos-texto {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.planos-texto p {
+    color: white;
+}
+
+.opcoes-planos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    padding-left: 10%;
+    padding-right: 10%;
+    gap: 20px;
+}
+
+.opcao-planos {
+    background-color: rgb(44, 44, 44) !important;
+    text-align: center;
+    border-radius: 14px;
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+
+.opcao-planos h3 {
+    color: white;
+    padding: 10px;
+}
+
+.opcao-planos img {
+    width: 90%;
+}
+
+.opcao-planos:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 5px red;
+}
+
+.opcao-planos button {
+    background-color: red;
+    color: white;
+    width: 70%;
+    border: none;
+    border-radius: 14px;
+    padding: 10px;
+    margin: 10px 0 10px 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.5s, background-color 0.5s;
+}
+
+.opcao-planos button:hover {
+    background-color: rgb(255, 48, 48);
+    transform: scale(1.05);
+}
+
+.opcao-planos button:active {
+    transform: scale(0.95);
+}
+
+.opcao-planos img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 15px auto;
+    border-radius: 14px;
+    border: 2px solid red;
+}
+
+.sobre {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px;
+    gap: 40px;
+}
+
+.sobre-texto {
+    width: 40%;
+    text-align: justify;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.sobre-texto p {
+    font-size: 1.1em;
+    line-height: 1.6;
+}
+
+.sobre-img {
+    width: 60%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+}
+
+.sobre-img img {
+    width: 90%;
+    border-radius: 14px;
+    object-fit: cover;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.5s;
+}
+
+.sobre-img img:hover {
+    transform: scale(1.05);
+}
+
+.aulas-coletivas {
+    background-color: rgb(22, 22, 22);
+    color: white;
+    padding: 40px;
+    gap: 40px;
+}
+
+.aulas-texto {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.galeria {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+    gap: 20px;
+}
+
+.card {
+    background-color: rgb(44, 44, 44) !important;
+    border-radius: 14px;
+    width: 300px;
+    height: 500px;
+    padding: 15px;
+    display: flex;
+    text-align: center;
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+
+.card h3 {
+    color: red;
+}
+.card p {
+    color: white;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 5px red;
+}
+
+.card img {
+    max-width: 200px;
+    height: auto;
+    display: block;
+    margin: 15px auto;
+    border-radius: 14px;
+    border: 2px solid red;
+}
+
+.agendar-aula{
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+    gap: 40px;
+}
+
+form {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(44, 44, 44) !important;
+    width: 35%;
+    height: auto;
+    border-radius: 14px;
+}
+
+form h3 {
+    margin: 10px;
+}
+
+form input, form select {
+    background-color: #242424;
+    color: white;
+    width: 90%;
+    border: none;
+    border-radius: 14px;
+    padding: 12px;
+    margin: 10px 0 10px 0;
+}
+
+.form button {
+    background-color: red;
+    color: white;
+    width: 70%;
+    border: none;
+    border-radius: 14px;
+    padding: 10px;
+    margin: 10px 0 10px 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.5s, background-color 0.5s;
+}
+
+.form button:hover {
+    background-color: rgb(255, 48, 48);
+    transform: scale(1.05);
+}
+
+.form button:active {
+    transform: scale(0.95);
+}
+
+.tabela-horarios {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(44, 44, 44) !important;
+    width: 55%;
+    height: auto;
+}
+
+.tabela-horarios h3 {
+    margin: 10px;
+}
+
+.tabela-horarios table {
+    width: 95%;
+}
+
+.avaliacao-fisica {
+    background-color: white;
+    padding: 40px;
+    gap: 40px;
+}
+
+.avaliacao-texto {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.agendar-avaliacao {
+    display: flex;
+    justify-content: center;
+}
+
+.formulario-avaliacao {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: rgb(44, 44, 44) !important;
+    width: 35%;
+    height: auto;
+    border-radius: 14px;
+}
+
+.formulario-avaliacao input {
+    background-color: #242424;
+    color: white;
+    width: 90%;
+    border: none;
+    border-radius: 14px;
+    padding: 12px;
+    margin: 10px 0 10px 0;
+}
+
+.avaliacao-com {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.avaliacao-com p {
+    font-size: 1.4em;
+    font-weight: bold;
+    color: red;
+    margin: 0;
+}
+
+.opcoes-avaliador {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60px;
+    flex-wrap: wrap;
+}
+
+.opcao-avaliador {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.opcao-avaliador img {
+    height: 230px;
+    width: auto;
+    border-radius: 14px;
+    transition: transform 0.5s, box-shadow 0.5s;
+}
+
+.opcao-avaliador img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 5px red;;
+}
+
+.opcoes-avaliador img:active {
+    transform: scale(0.95);
+}
+
+.opcao-avaliador input[type="radio"] {
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    accent-color: red;
+}
+
+.opcao-avaliador span {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.formulario-avaliacao button {
+    background-color: red;
+    color: white;
+    width: 70%;
+    border: none;
+    border-radius: 14px;
+    padding: 10px;
+    margin: 10px 0 10px 0;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.5s, background-color 0.5s;
+}
+
+.agendar-avaliacao button:hover {
+    background-color: rgb(255, 48, 48);
+    transform: scale(1.05);
+}
+
+.agendar-avaliacao button:active {
+    transform: scale(0.95);
+}
+
+.formulario-avaliacao h3 {
+    color: white;
+    margin: 10px;
+}
