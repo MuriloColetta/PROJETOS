@@ -17,8 +17,36 @@ header img {
 
 header h1 {
     text-align: center;
-    color: red;
+    color: white;
     margin-bottom: 30px;
+}
+
+.bandeira {
+  background-color: red;
+  color: white;
+  display: inline-flex;
+  padding: 10px 30px;
+  transform: skew(-30deg);
+  margin-bottom: 20px;
+}
+
+.bandeira h1, .bandeira h2 {
+  transform: skew(30deg);
+  margin: 0;
+  font-size: 2.5em;
+}
+
+.nav-link {
+    color: red;
+}
+
+.nav-link:hover{
+    color: red;
+}
+
+.nav-link:active {
+    background-color: red;
+    color: white;
 }
 
 .tab-pane {
@@ -77,6 +105,7 @@ form button:active {
 
 table {
     color: white;
+    text-align: center;
 }
 
 .btn-danger {
