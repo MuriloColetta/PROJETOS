@@ -325,6 +325,7 @@ form button:active {
     display: flex;
     align-items: center;
     flex-direction: column;
+    justify-content: center;
     background-color: rgb(44, 44, 44);
     width: 55%;
     height: auto;
@@ -333,16 +334,6 @@ form button:active {
 
 .tabela-horarios h3 {
     margin: 10px;
-}
-
-.tabela-horarios input {
-    background-color: #242424;
-    color: white;
-    width: 90%;
-    border: none;
-    border-radius: 14px;
-    padding: 12px;
-    margin: 10px 0;
 }
 
 .tabela-horarios table {
