@@ -76,18 +76,18 @@ nav a {
 
 /* ====== BANDEIRA ====== */
 .bandeira {
-  background-color: red;
-  color: white;
-  display: inline-flex;
-  padding: 10px 30px;
-  transform: skew(-30deg);
-  margin-bottom: 20px;
+    background-color: red;
+    color: white;
+    display: inline-flex;
+    padding: 10px 30px;
+    transform: skew(-30deg);
+    margin-bottom: 20px;
 }
 
 .bandeira h1, .bandeira h2 {
-  transform: skew(30deg);
-  margin: 0;
-  font-size: 2.5em;
+    transform: skew(30deg);
+    margin: 0;
+    font-size: 2.5em;
 }
 
 /* ====== PLANOS ====== */
@@ -110,11 +110,9 @@ nav a {
 .opcoes-planos {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-around;
     padding-top: 40px;
     padding-bottom: 40px;
-    padding-left: 10%;
-    padding-right: 10%;
     gap: 20px;
 }
 
@@ -171,7 +169,7 @@ nav a {
 .sobre {
     background-color: white;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 40px;
     gap: 40px;
 }
@@ -207,6 +205,31 @@ nav a {
 .sobre-img img:hover {
     transform: scale(1.05);
 }
+
+/* ====== FILIAIS ====== */
+.filiais {
+    background-color: white;
+    padding: 40px;
+    gap: 40px;
+}
+
+.filiais-texto {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.filiais h2 {
+    color: red;
+    padding-left: 105px;
+    font-weight: bold;
+}
+
+.filiais-lista {
+    display: flex;
+    justify-content: space-around;
+}
+
 
 /* ====== FORMULÁRIOS ====== */
 form {
@@ -316,7 +339,7 @@ form button:active {
 
 .agendar-aula {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     padding: 50px;
     gap: 40px;
 }
