@@ -8,7 +8,8 @@ create table cliente (
     cpf varchar(14) not null,
     data_nascimento date not null,
     email varchar(50) not null,
-    telefone varchar(15) not null
+    telefone varchar(15) not null,
+    senha_cliente varchar(100) not null
 );
 
 create table funcionario (
@@ -19,7 +20,8 @@ create table funcionario (
     salario decimal(10,2) not null,
     carga_horaria decimal(5,2),
     email varchar(50) not null,
-    telefone varchar(15) not null
+    telefone varchar(15) not null,
+    senha_funcionario varchar(100) not null
 );
 
 create table suporte (
@@ -50,8 +52,8 @@ create table aula (
 
 create table treino (
     id_treino int auto_increment primary key,
-    carga_horaria decimal(5,2) not null,
-    descricao varchar(255) not null
+    descricao varchar(255) not null,
+    dias int not null
 );
 
 create table avaliacao_fisica (
@@ -138,29 +140,29 @@ alter table agendamento
 add constraint fk_agendamento_cliente foreign key (id_cliente) references cliente(id_cliente),
 add constraint fk_agendamento_aula foreign key (id_aula) references aula(id_aula);
 
-insert into cliente (nome_cliente, cpf, data_nascimento, email, telefone) values
-('Ana Souza', '111.111.111-11', '1990-01-01', 'ana@email.com', '11999990001'),
-('Bruno Lima', '222.222.222-22', '1985-02-02', 'bruno@email.com', '11999990002'),
-('Carla Dias', '333.333.333-33', '1992-03-03', 'carla@email.com', '11999990003'),
-('Daniel Silva', '444.444.444-44', '1995-04-04', 'daniel@email.com', '11999990004'),
-('Eduarda Costa', '555.555.555-55', '1998-05-05', 'eduarda@email.com', '11999990005'),
-('Felipe Santos', '666.666.666-66', '1993-06-06', 'felipe@email.com', '11999990006'),
-('Gabriela Alves', '777.777.777-77', '1996-07-07', 'gabriela@email.com', '11999990007'),
-('Henrique Rocha', '888.888.888-88', '1991-08-08', 'henrique@email.com', '11999990008'),
-('Isabela Torres', '999.999.999-99', '1994-09-09', 'isabela@email.com', '11999990009'),
-('João Pereira', '000.000.000-00', '1997-10-10', 'joao@email.com', '11999990010');
+insert into cliente (nome_cliente, cpf, data_nascimento, email, telefone, senha_cliente) values
+('Ana Souza', '111.111.111-11', '1990-01-01', 'ana@email.com', '11999990001', 'a1111'),
+('Bruno Lima', '222.222.222-22', '1985-02-02', 'bruno@email.com', '11999990002', 'b2222'),
+('Carla Dias', '333.333.333-33', '1992-03-03', 'carla@email.com', '11999990003', 'c3333'),
+('Daniel Silva', '444.444.444-44', '1995-04-04', 'daniel@email.com', '11999990004', 'd4444'),
+('Eduarda Costa', '555.555.555-55', '1998-05-05', 'eduarda@email.com', '11999990005', 'e5555'),
+('Felipe Santos', '666.666.666-66', '1993-06-06', 'felipe@email.com', '11999990006', 'f6666'),
+('Gabriela Alves', '777.777.777-77', '1996-07-07', 'gabriela@email.com', '11999990007', 'g7777'),
+('Henrique Rocha', '888.888.888-88', '1991-08-08', 'henrique@email.com', '11999990008', 'h8888'),
+('Isabela Torres', '999.999.999-99', '1994-09-09', 'isabela@email.com', '11999990009', 'i9999'),
+('João Pereira', '000.000.000-00', '1997-10-10', 'joao@email.com', '11999990010', 'j0000');
 
-insert into funcionario (nome_funcionario, cpf, cargo, salario, carga_horaria, email, telefone) values
-('Marcos Lima', '123.456.789-00', 'Instrutor', 2500.00, 40.00, 'marcos@email.com', '11988880001'),
-('Patrícia Silva', '234.567.890-11', 'Recepcionista', 1800.00, 36.00, 'patricia@email.com', '11988880002'),
-('Rafael Costa', '345.678.901-22', 'Personal Trainer', 3000.00, 44.00, 'rafael@email.com', '11988880003'),
-('Camila Souza', '456.789.012-33', 'Instrutora', 2500.00, 40.00, 'camila@email.com', '11988880004'),
-('Lucas Oliveira', '567.890.123-44', 'Gerente', 4000.00, 44.00, 'lucas@email.com', '11988880005'),
-('Fernanda Gomes', '678.901.234-55', 'Faxineira', 1500.00, 30.00, 'fernanda@email.com', '11988880006'),
-('Gustavo Santos', '789.012.345-66', 'Instrutor', 2500.00, 40.00, 'gustavo@email.com', '11988880007'),
-('Amanda Rocha', '890.123.456-77', 'Recepcionista', 1800.00, 36.00, 'amanda@email.com', '11988880008'),
-('Pedro Nunes', '901.234.567-88', 'Personal Trainer', 3000.00, 44.00, 'pedro@email.com', '11988880009'),
-('Juliana Almeida', '012.345.678-99', 'Instrutora', 2500.00, 40.00, 'juliana@email.com', '11988880010');
+insert into funcionario (nome_funcionario, cpf, cargo, salario, carga_horaria, email, telefone, senha_funcionario) values
+('adm1', '123.456.789-00', 'Instrutor', 2500.00, 40.00, 'adm1@email.com', '11988880001', '1234'),
+('Patrícia Silva', '234.567.890-11', 'Recepcionista', 1800.00, 36.00, 'patricia@email.com', '11988880002', 'b1234'),
+('Rafael Costa', '345.678.901-22', 'Personal Trainer', 3000.00, 44.00, 'rafael@email.com', '11988880003', 'c1234'),
+('Camila Souza', '456.789.012-33', 'Instrutora', 2500.00, 40.00, 'camila@email.com', '11988880004', 'd1234'),
+('Lucas Oliveira', '567.890.123-44', 'Gerente', 4000.00, 44.00, 'lucas@email.com', '11988880005', 'e1234'),
+('Fernanda Gomes', '678.901.234-55', 'Faxineira', 1500.00, 30.00, 'fernanda@email.com', '11988880006', 'f1234'),
+('Gustavo Santos', '789.012.345-66', 'Instrutor', 2500.00, 40.00, 'gustavo@email.com', '11988880007', 'g1234'),
+('Amanda Rocha', '890.123.456-77', 'Recepcionista', 1800.00, 36.00, 'amanda@email.com', '11988880008', 'h1234'),
+('Pedro Nunes', '901.234.567-88', 'Personal Trainer', 3000.00, 44.00, 'pedro@email.com', '11988880009', 'i1234'),
+('Juliana Almeida', '012.345.678-99', 'Instrutora', 2500.00, 40.00, 'juliana@email.com', '11988880010', 'j1234');
 
 insert into suporte (descricao, categoria, status_suporte) values
 ('Problema com catraca', 'Equipamento', 'ativo'),
@@ -186,17 +188,23 @@ insert into plano (nome_plano, preco, descricao) values
 ('Semestral', 499.90, 'Plano de 6 meses'),
 ('Anual', 899.90, 'Plano de 12 meses');
 
-insert into filiais (cnpj, endereco) values
-('11.111.111/0001-11', 'Rua A, 100 - Centro'),
-('22.222.222/0001-22', 'Rua B, 200 - Norte'),
-('33.333.333/0001-33', 'Rua C, 300 - Sul'),
-('44.444.444/0001-44', 'Rua D, 400 - Leste'),
-('55.555.555/0001-55', 'Rua E, 500 - Oeste'),
-('66.666.666/0001-66', 'Rua F, 600 - Centro'),
-('77.777.777/0001-77', 'Rua G, 700 - Norte'),
-('88.888.888/0001-88', 'Rua H, 800 - Sul'),
-('99.999.999/0001-99', 'Rua I, 900 - Leste'),
-('00.000.000/0001-00', 'Rua J, 1000 - Oeste');
+INSERT INTO filiais (cnpj, endereco) VALUES
+('11.111.111/0001-11', 'Av. Laranjeiras, 1200 – Jardim Nova Itália'),
+('22.222.222/0001-22', 'Rua Barão de Campinas, 85 – Centro'),
+('33.333.333/0001-33', 'Rua Tiradentes, 450 – Jardim do Lago'),
+('44.444.444/0001-44', 'Av. Costa e Silva, 1020 – Vila São João'),
+('55.555.555/0001-55', 'Rua Pedro Zaccaria, 699 – Parque Egisto Ragazzo'),
+('66.666.666/0001-66', 'Av. Campinas, 1600 – Vila Camargo'),
+('77.777.777/0001-77', 'Rua Luiz Pântano, 233 – Jardim Nova Europa'),
+('88.888.888/0001-88', 'Av. Maestro Xixxá, 510 – Cecap'),
+('99.999.999/0001-99', 'Rua Paschoal Marmo, 1420 – Jardim Morro Azul'),
+('00.000.000/0001-00', 'Av. Maria Thereza, 780 – Parque Egisto Ragazzo'),
+('12.345.678/0001-01', 'Rua Santa Cruz, 410 – Centro'),
+('23.456.789/0001-02', 'Rua Humberto de Campos, 900 – Vila Cláudia'),
+('34.567.890/0001-03', 'Av. Lauro Corrêa da Silva, 2100 – Jardim Novo Horizonte'),
+('45.678.901/0001-04', 'Rua João Simões, 370 – Vila Independência'),
+('56.789.012/0001-05', 'Rua Prefeito Dr. Alberto Ferreira, 520 – Boa Vista');
+
 
 insert into aula (modalidade, data_hora) values
 ('Yoga', '2025-10-20 08:00'),
@@ -210,17 +218,17 @@ insert into aula (modalidade, data_hora) values
 ('Alongamento', '2025-10-20 16:00'),
 ('Dança', '2025-10-20 17:00');
 
-insert into treino (carga_horaria, descricao) values
-(1.00, 'Treino leve de musculação'),
-(1.00, 'Treino intermediário'),
-(1.50, 'Treino avançado'),
-(0.50, 'Cardio rápido'),
-(1.00, 'Treino de resistência'),
-(1.50, 'Treino funcional'),
-(1.00, 'Treino de força'),
-(1.00, 'Treino para emagrecimento'),
-(1.50, 'Treino de alto rendimento'),
-(0.75, 'Treino regenerativo');
+insert into treino (dias, descricao) values
+(2, 'Treino leve de musculação'),
+(3, 'Treino intermediário'),
+(5, 'Treino avançado'),
+(4, 'Cardio rápido'),
+(3, 'Treino de resistência'),
+(3, 'Treino funcional'),
+(4, 'Treino de força'),
+(5, 'Treino para emagrecimento'),
+(3, 'Treino de alto rendimento'),
+(2, 'Treino regenerativo');
 
 insert into avaliacao_fisica (data, descricao, id_cliente, id_funcionario) values
 ('2025-10-01', 'Avaliação inicial', 1, 1),
