@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="ICONES/icone.png" type="image/x-icon">
+    <title>Academia TechFit</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <img src="IMG/logo.png" alt="Logo TechFit">
+        <nav>
+            <ul class="nav nav-pills">
+                <li class="nav-item"><a href="#planos" class="nav-link">Planos</a></li>
+                <li class="nav-item"><a href="#sobre" class="nav-link">Sobre</a></li>
+                <li class="nav-item"><a href="#aulas-coletivas" class="nav-link">Aulas coletivas</a></li>
+                <li class="nav-item"><a href="#avaliacao-fisica" class="nav-link">Avaliação física</a></li>
+                <li class="nav-item"><a href="#suporte" class="nav-link">Suporte</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Seção inicial -->
+        <section class="inicial">
+            <h1><u>SUA MELHOR <br>VERSÃO <br>COMEÇA <br>AQUI!</u></h1>
+        </section>
+
+        <!-- Seção de Planos -->
+        <section class="planos" id="planos">
+            <div class="planos-texto">
+                <div class="bandeira">
+                    <h1>Escolha Seu Plano</h1>
+                </div>
+                <p>Na TechFit, oferecemos planos feitos sob medida para o seu estilo de vida. Seja para treinar todos os dias ou apenas algumas vezes na semana, temos a opção ideal para você alcançar seus objetivos com flexibilidade, conforto e o melhor custo-benefício.</p>
+            </div>
+            <div class="opcoes-planos">
+                <article class="opcao-planos">
+                    <img src="IMG/plano-básico.png" alt="Plano Básico">
+                    <h3>Preço: R$ 64,90/mês</h3>
+                    <button onclick="assinarPlano()">Assinar</button>
+                </article>
+
+                <article class="opcao-planos">
+                    <img src="IMG/plano-plus.png" alt="Plano Essencial">
+                    <h3>Preço: R$ 79,90/mês</h3>
+                    <button onclick="assinarPlano()">Assinar</button>
+                </article>
+
+                <article class="opcao-planos">
+                    <img src="IMG/plano-premium.png" alt="Plano Premium">
+                    <h3>Preço: R$ 120,00/mês</h3>
+                    <button onclick="assinarPlano()">Assinar</button>
+                </article>
+            </div>
+        </section>
+
+        <!-- Seção Sobre -->
+        <section class="sobre" id="sobre">
+            <div class="sobre-texto">
+                <div class="bandeira">
+                    <h1>Sobre a TechFit</h1>
+                </div>
+                <p>A <strong>TechFit</strong> é mais do que uma academia, é um espaço dedicado à evolução do corpo e da mente. Aqui, tecnologia e bem-estar se unem para oferecer uma experiência de treino completa e personalizada.</p>
+                <p>Nosso ambiente moderno e climatizado conta com equipamentos de última geração, instrutores qualificados e uma equipe sempre pronta para acompanhar você em cada etapa da sua jornada fitness.</p>
+                <p>Seja para ganhar massa, perder peso ou simplesmente adotar um estilo de vida mais saudável, a TechFit está aqui para te ajudar a alcançar sua melhor versão com motivação, foco e resultados reais.</p>
+            </div>
+            <div class="sobre-img">
+                <img src="IMG/sobre.webp" alt="Imagem da academia TechFit">
+            </div>
+        </section>
+
+        <!-- Seção de Filiais -->
+        <section class="filiais">
+            <div class="filiais-texto">
+                <div class="bandeira">
+                    <h1>Nossas Filiais</h1>
+                </div>
+                <p>Com 15 unidades estrategicamente localizadas, a TechFit está sempre perto de você. Encontre a filial mais próxima e venha nos visitar!</p>
+            </div>
+            <h2>Filiais TechFit - Limeira/SP</h2>
+            <div class="filiais-lista">
+                <div class="metade">
+                    <ul>
+                        <li>Av. Laranjeiras, 1200 – Jardim Nova Itália</li>
+                        <li>Rua Barão de Campinas, 85 – Centro</li>
+                        <li>Rua Tiradentes, 450 – Jardim do Lago</li>
+                        <li>Av. Costa e Silva, 1020 – Vila São João</li>
+                        <li>Rua Pedro Zaccaria, 699 – Parque Egisto Ragazzo</li>
+                        <li>Av. Campinas, 1600 – Vila Camargo</li>
+                        <li>Rua Luiz Pântano, 233 – Jardim Nova Europa</li>
+                        <li>Av. Maestro Xixxá, 510 – Cecap</li>
+                    </ul>
+                </div>
+                <div class="metade">
+                    <ul>
+                        <li>Rua Paschoal Marmo, 1420 – Jardim Morro Azul</li>
+                        <li>Av. Maria Thereza, 780 – Parque Egisto Ragazzo</li>
+                        <li>Rua Santa Cruz, 410 – Centro</li>
+                        <li>Rua Humberto de Campos, 900 – Vila Cláudia</li>
+                        <li>Av. Lauro Corrêa da Silva, 2100 – Jardim Novo Horizonte</li>
+                        <li>Rua João Simões, 370 – Vila Independência</li>
+                        <li>Rua Prefeito Dr. Alberto Ferreira, 520 – Boa Vista</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Aulas Coletivas -->
+        <section class="aulas-coletivas" id="aulas-coletivas">
+            <div class="aulas-texto">
+                <div class="bandeira">
+                    <h1>Aulas Coletivas</h1>
+                </div>
+                <p>Participe de nossas aulas coletivas e melhore sua saúde com atividades divertidas e motivadoras.</p>
+            </div>
+
+            <div class="galeria">
+                <article class="card">
+                    <img src="IMG/capoeira.jpg" alt="Capoeira">
+                    <h3>Capoeira</h3>
+                    <p>Arte brasileira que mistura luta, música e dança, promovendo agilidade e resistência.</p>
+                </article>
+                <article class="card">
+                    <img src="IMG/zumba.jpg" alt="Zumba">
+                    <h3>Zumba</h3>
+                    <p>Aula de dança animada que combina ritmos latinos com exercícios aeróbicos.</p>
+                </article>
+                <article class="card">
+                    <img src="IMG/sanda.jpg" alt="Sanda">
+                    <h3>Sanda</h3>
+                    <p>Arte marcial chinesa que mistura socos, chutes e técnicas de queda.</p>
+                </article>
+                <article class="card">
+                    <img src="IMG/yoga.webp" alt="Yoga">
+                    <h3>Yoga</h3>
+                    <p>Prática que combina posturas, respiração e relaxamento para equilíbrio corpo-mente.</p>
+                </article>
+                <article class="card">
+                    <img src="IMG/muay-tai.jpg" alt="Muay Thai">
+                    <h3>Muay Thai</h3>
+                    <p>Arte marcial tailandesa conhecida como a “luta das oito armas”, excelente para condicionamento.</p>
+                </article>
+            </div>
+
+            <div class="agendar-aula">
+                <form action="agendar-aula" method="POST">
+                    <h3>Agendar aula</h3>
+                    <input type="text" name="nome_cliente" id="nome_cliente" placeholder="Nome:">
+                    <select name="modalidade" id="modalidade">
+                        <option value="" selected>Modalidade</option>
+                        <option value="capoeira">Capoeira</option>
+                        <option value="zumba">Zumba</option>
+                        <option value="sanda">Sanda</option>
+                        <option value="yoga">Yoga</option>
+                        <option value="muaythai">Muay Thai</option>
+                    </select>
+                    <select name="horario" id="horario">
+                        <option value="" selected>Horário</option>
+                    </select>
+                    <button onclick="agendarAula()">Agendar</button>
+                </form>
+
+                <div class="tabela-horarios">
+                    <h3>Modalidades e horários</h3>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Modalidades</th>
+                                <th scope="col">Horários</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Capoeira</td>
+                                <td>Segunda - 16:30 <br>Sexta - 16:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Zumba</td>
+                                <td>Terça - 13:40 <br>Quinta - 14:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Sanda</td>
+                                <td>Terça - 17:00 <br>Quinta - 18:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Yoga</td>
+                                <td>Segunda - 14:00 <br>Quinta - 15:00</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>Muay Thai</td>
+                                <td>Quarta - 19:00 <br>Sexta - 19:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Seção de Avaliação Física -->
+        <section class="avaliacao-fisica" id="avaliacao-fisica">
+            <div class="avaliacao-texto">
+                <div class="bandeira">
+                    <h1>Avaliação Física</h1>
+                </div>
+                <p>Agende sua avaliação física gratuita com um de nossos treinadores e receba um plano personalizado para alcançar seus objetivos.</p>
+            </div>
+
+            <div class="agendar-avaliacao">
+                <form action="agendar-avaliacao" method="POST">
+                    <h3>Agendar Avaliação</h3>
+                    <input type="text" name="nome_cliente" id="nome_cliente" placeholder="Nome:">
+                    <input type="date" name="data_avaliacao" id="data_avaliacao">
+                    <button onclick="agendarAvaliacao()">Agendar Avaliação</button>
+                </form>
+                <img src="IMG/treinadores.jpg">
+            </div>
+        </section>
+
+        <section class="suporte" id="suporte">
+            <div class="suporte-texto">
+                <div class="bandeira">
+                    <h1>Suporte</h1>
+                </div>
+                <p>Precisa de ajuda? Tire suas dúvidas aqui ou entre em contato com nossa equipe de suporte para assistência rápida e eficiente.</p>
+            </div>
+
+            <div class="suporte-duvidas">
+                
+            </div>
+            <ul class="nav nav-tabs justify-content-center" id="painelAbas" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="suporte-gerais-tab" data-bs-toggle="tab" data-bs-target="#suporte-gerais" type="button" role="tab">Dúvidas gerais</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="suporte-acesso-tab" data-bs-toggle="tab" data-bs-target="#suporte-acesso" type="button" role="tab">Acesso</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="suporte-planos-tab" data-bs-toggle="tab" data-bs-target="#suporte-planos" type="button" role="tab">Planos</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="suporte-pagamento-tab" data-bs-toggle="tab" data-bs-target="#suporte-pagamento" type="button" role="tab">Pagamento</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="suporte-aulas-tab" data-bs-toggle="tab" data-bs-target="#suporte-aulas" type="button" role="tab">Aulas e Horários</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="suporte-treinos-tab" data-bs-toggle="tab" data-bs-target="#suporte-treinos" type="button" role="tab">Treinos</button>
+                </li>
+            </ul>
+            <div class="tab-content mt-4" id="painelAbasConteudo">
+                <div class="tab-pane fade show active" id="suporte-gerais" role="tabpanel">
+                    <h2>Dúvidas gerais</h2>
+                    <h4>A academia fica aberta em feriados?</h4>
+                    <p>Feriados possuem horários especiais. Publicamos o aviso com antecedência nas redes sociais e na entrada da academia.</p>
+                    <h4>Posso treinar mesmo sendo iniciante?</h4>
+                    <p>Claro! A academia é preparada para todos os níveis. O instrutor vai adaptar o treino conforme sua experiência e condicionamento.</p><br>
+                </div>
+                <div class="tab-pane fade" id="suporte-acesso" role="tabpanel">
+                    <h2>Dúvidas sobre Acesso à Academia</h2>
+                    <h4>Como faço para entrar na academia?</h4>
+                    <p>No primeiro cadastro, você recebe um código de acesso, QR Code ou cadastro biométrico (dependendo da sua unidade). É só apresentar esse identificador na catraca para entrar.</p>
+                    <h4>Posso levar convidados?</h4>
+                    <p>Sim! Temos a opção de Treino Experimental para convidados, válido uma vez por pessoa. Basta fazer o agendamento na recepção ou via WhatsApp.</p><br>
+                </div>
+                <div class="tab-pane fade" id="suporte-planos" role="tabpanel">
+                    <h2>Dúvidas sobre Planos</h2>
+                    <h4>Qual a diferença entre os planos?</h4>
+                    <p>Todos os nossos planos são mensais. A única diferença entre eles é quantos dias por semana você pode treinar. Você escolhe o plano que melhor combina com sua rotina.</p>
+                    <h4>Posso ir qualquer dia dentro da minha quantidade semanal?</h4>
+                    <p>Sim! Se o seu plano permite, por exemplo, 3 dias por semana, você escolhe quais dias quer treinar, segunda, quarta e sexta; ou terça, quinta e sábado… como preferir!</p><br>
+                </div>
+                <div class="tab-pane fade" id="suporte-pagamento" role="tabpanel">
+                    <h2>Dúvidas sobre Pagamentos</h2>
+                    <h4>Quais formas de pagamento vocês aceitam?</h4>
+                    <p>Aceitamos PIX, cartão de crédito, cartão de débito e dinheiro. Você pode escolher a opção que preferir na hora da matrícula ou renovação.</p>
+                    <h4>Atrasei o pagamento, e agora?</h4>
+                    <p>Caso o pagamento atrase, seu acesso pode ser temporariamente bloqueado até a regularização. Entre em contato com a recepção para renegociar.</p><br>
+                </div>
+                <div class="tab-pane fade" id="suporte-aulas" role="tabpanel">
+                    <h2>Dúvidas sobre Aulas e Horários</h2>
+                    <h4>Como vejo os horários das aulas?</h4>
+                    <p>Os horários estão disponíveis na aba Aulas do site. Lá você encontra Capoeira, Zumba, Sanda, Yoga, Funcional e outros treinos, com dias e horários completos.</p>
+                    <h4>Preciso agendar para participar das aulas?</h4>
+                    <p>Algumas aulas exigem agendamento devido ao limite de vagas. Se for necessário, o botão de agendamento aparece junto ao horário da turma.</p><br>
+                </div>
+                <div class="tab-pane fade" id="suporte-treinos" role="tabpanel">
+                    <h2>Dúvidas sobre Treino e Orientação</h2>
+                    <h4>Vocês montam treino personalizado?</h4>
+                    <p>Sim! Nossa equipe avalia seu objetivo, seja ganhar massa, emagrecer, melhorar condicionamento ou reabilitar lesões, e monta um treino personalizado para você.</p>
+                    <h4>Posso pedir ajuda durante o treino?</h4>
+                    <p>Com certeza! Nossos instrutores estão sempre disponíveis para tirar dúvidas, corrigir postura e ajudar você a treinar com segurança.</p><br>
+                </div>
+            </div>
+            <h4>Caso tenha mais duvidas entre em contato com nossa equipe.</h4>
+            <ul>Telefone: (19) 99999-9999</ul>
+            <ul>Email: techfit@gmail.com</ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Academia TechFit — Todos os direitos reservados.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
