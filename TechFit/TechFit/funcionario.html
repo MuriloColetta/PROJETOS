@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="ICONES/icone.png" type="image/x-icon">
+  <title>Painel Administrativo - TechFit</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="funcionario.css">
+</head>
+<body>
+  <header>
+    <img src="IMG/logo.png">
+    <div class="bandeira">
+      <h1>Painel Administrativo</h1>
+    </div>
+  </header>
+
+  <main class="container py-4">
+    <!-- ======== Abas ======== -->
+    <ul class="nav nav-tabs justify-content-center" id="painelAbas" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="clientes-tab" data-bs-toggle="tab" data-bs-target="#clientes" type="button" role="tab">Clientes</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="funcionarios-tab" data-bs-toggle="tab" data-bs-target="#funcionarios" type="button" role="tab">Funcionários</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="aulas-tab" data-bs-toggle="tab" data-bs-target="#aulas" type="button" role="tab">Aulas</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="avaliacoes-tab" data-bs-toggle="tab" data-bs-target="#avaliacoes" type="button" role="tab">Avaliações</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="treinos-tab" data-bs-toggle="tab" data-bs-target="#treinos" type="button" role="tab">Treinos</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="filiais-tab" data-bs-toggle="tab" data-bs-target="#filiais" type="button" role="tab">Filiais</button>
+      </li>
+    </ul>
+
+    <!-- ======== Conteúdo das Abas ======== -->
+    <div class="tab-content mt-4" id="painelAbasConteudo">
+      <!-- ======== CLIENTES ======== -->
+      <div class="tab-pane fade show active" id="clientes" role="tabpanel">
+        <form action="cadastro_clientes.php" method="POST" class="row g-3 mb-4">
+          <h4>Cadastrar de Cliente</h4>
+          <div class="col-md-3">
+            <input type="text" name="nome" placeholder="Nome completo" required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" name="cpf" placeholder="CPF" required>
+          </div>
+          <div class="col-md-3">
+            <input type="date" name="data_nasc" required>
+          </div>
+          <div class="col-md-4">
+            <input type="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" name="telefone" placeholder="Telefone" required>
+          </div>
+          <div class="col-md-2">
+            <button type="submit">Cadastrar</button>
+          </div>
+        </form>
+
+        <h4>Clientes Registrados</h4>
+        <table class="table table-striped table-dark table-bordered align-middle mt-3">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Data de nascimento</th>
+              <th>Email</th>
+              <th>Telefone</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Ana Souza</td>
+              <td>111.111.111-11</td>
+              <td>15/05/1990</td>
+              <td>ana@email.com</td>
+              <td>(11) 99999-0001</td>
+              <td>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ======== FUNCIONÁRIOS ======== -->
+      <div class="tab-pane fade" id="funcionarios" role="tabpanel">
+        <form action="cadastro_funcionarios.php" method="POST" class="row g-3 mb-4">
+        <h4>Cadastrar Funcionário</h4>
+          <div class="col-md-4">
+            <input type="text" name="nome" placeholder="Nome completo" required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" name="cpf" placeholder="CPF" required>
+          </div>
+          <div class="col-md-3">
+            <input type="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" name="telefone" placeholder="Telefone" required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" name="cargo" placeholder="Cargo" required>
+          </div>
+          <div class="col-md-2">
+            <input type="text" name="salario" placeholder="Salário" required>
+          </div>
+          <div class="col-md-2">
+            <input type="text" name="carga_horaria" placeholder="Carga horária" required>
+          </div>
+          <div class="col-md-2">
+            <button type="submit">Cadastrar</button>
+          </div>
+        </form>
+
+        <h4>Funcionários Registrados</h4>
+        <table class="table table-striped table-dark table-bordered align-middle mt-3">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>CPF</th>
+              <th>Email</th>
+              <th>Telefone</th>
+              <th>Cargo</th>
+              <th>Salário</th>
+              <th>Carga-horária</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Marcos Lima</td>
+              <td>222.222.222-22</td>
+              <td>marcos@email.com</td>
+              <td>(11) 98888-0001</td>
+              <td>Instrutor</td>
+              <td>R$ 1800,00</td>
+              <td>8 horas</td>
+              <td>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ======== AULAS ======== -->
+      <div class="tab-pane fade" id="aulas" role="tabpanel">
+        <form action="cadastro_aulas.php" method="POST" class="row g-3 mb-4">
+        <h4>Cadastrar Aula</h4>
+          <div class="col-md-4">
+            <input type="text" name="modalidade" placeholder="Modalidade" required>
+          </div>
+          <div class="col-md-4">
+            <input type="text" name="horario" placeholder="Data e Horário" required>
+          </div>
+          <div class="col-md-2">
+            <button type="submit">Cadastrar</button>
+          </div>
+        </form>
+
+        <h4>Aulas Cadastradas</h4>
+        <table class="table table-striped table-dark table-bordered align-middle mt-3">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Modalidade</th>
+              <th>Data/Horário</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Yoga</td>
+              <td>Segunda - 08:00</td>
+              <td>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ======== AVALIAÇÕES ======== -->
+      <div class="tab-pane fade" id="avaliacoes" role="tabpanel">
+        <form action="cadastro_avaliacoes.php" method="POST" class="row g-3 mb-4">
+        <h4>Cadastrar Avaliação</h4>
+          <div class="col-md-3">
+            <input type="text" name="cliente" placeholder="Cliente" required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" name="avaliador" placeholder="Avaliador" required>
+          </div>
+          <div class="col-md-3">
+            <input type="date" name="data" required>
+          </div>
+          <div class="col-md-3">
+            <input type="text" name="descricao" placeholder="Descrição" required>
+          </div>
+          <div class="col-md-2">
+            <button type="submit">Cadastrar</button>
+          </div>
+        </form>
+
+        <h4>Avaliações Físicas</h4>
+        <table class="table table-striped table-dark table-bordered align-middle mt-3">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Cliente</th>
+              <th>Avaliador</th>
+              <th>Data</th>
+              <th>Descrição</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Ana Souza</td>
+              <td>Marcos Lima</td>
+              <td>01/10/2025</td>
+              <td>Avaliação inicial</td>
+              <td>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ======== TREINOS ======== -->
+      <div class="tab-pane fade" id="treinos" role="tabpanel">
+        <form action="cadastro_treinos.php" method="POST" class="row g-3 mb-4">
+        <h4>Cadastrar Treino</h4>
+          <div class="col-md-5">
+            <input type="text" name="descricao" placeholder="Descrição do treino" required>
+          </div>
+          <div class="col-md-3">
+            <input type="number" name="dias" placeholder="Dias/semana" required>
+          </div>
+          <div class="col-md-2">
+            <button type="submit">Cadastrar</button>
+          </div>
+        </form>
+
+        <h4>Treinos Cadastrados</h4>
+        <table class="table table-striped table-dark table-bordered align-middle mt-3">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Descrição</th>
+              <th>Dias/semana</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>Push, Pull, Legs</td>
+              <td>3</td>
+              <td>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ======== FILIAIS ======== -->
+      <div class="tab-pane fade" id="filiais" role="tabpanel">
+        <form action="cadastro_filiais.php" method="POST" class="row g-3 mb-4">
+        <h4>Cadastrar Filial</h4>
+          <div class="col-md-5">
+            <input type="text" name="cnpj" placeholder="CNPJ:" required>
+          </div>
+          <div class="col-md-3">
+            <input type="number" name="endereco" placeholder="Endereço:" required>
+          </div>
+          <div class="col-md-2">
+            <button type="submit">Cadastrar</button>
+          </div>
+        </form>
+
+        <h4>Filiais Cadastrados</h4>
+        <table class="table table-striped table-dark table-bordered align-middle mt-3">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>CNPJ</th>
+              <th>Endereço</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>11.111.111/0001-11</td>
+              <td>Av. Laranjeiras, 1200 – Jardim Nova Itália</td>
+              <td>
+                <button class="btn btn-sm btn-warning">Editar</button>
+                <button class="btn btn-sm btn-danger">Excluir</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="index.html" class="btn btn-danger">Voltar ao site</a>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
