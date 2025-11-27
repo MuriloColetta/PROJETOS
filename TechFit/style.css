@@ -340,8 +340,13 @@ form button:active {
 .agendar-aula {
     display: flex;
     justify-content: space-around;
+    align-items: center;
     padding: 50px;
     gap: 40px;
+}
+
+.agendar-aula form {
+    height: 0%;
 }
 
 .tabela-horarios {
@@ -351,7 +356,7 @@ form button:active {
     justify-content: center;
     background-color: rgb(44, 44, 44);
     width: 55%;
-    height: auto;
+    height: 0%;
     border-radius: 14px;
 }
 
@@ -361,7 +366,15 @@ form button:active {
 
 .tabela-horarios table {
     width: 95%;
+    color: white;
+    text-align: left;
+    margin: 10px;
 }
+
+.tabela-horarios td {
+    border-top: white 1px solid;
+}
+
 
 /* ====== AVALIAÇÃO FÍSICA ====== */
 .avaliacao-fisica {
