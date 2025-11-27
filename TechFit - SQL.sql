@@ -207,16 +207,16 @@ INSERT INTO filiais (cnpj, endereco) VALUES
 
 
 insert into aula (modalidade, data_hora) values
-('Yoga', '2025-10-20 08:00'),
-('Spinning', '2025-10-20 09:00'),
-('Crossfit', '2025-10-20 10:00'),
-('Pilates', '2025-10-20 11:00'),
-('Zumba', '2025-10-20 12:00'),
-('Boxe', '2025-10-20 13:00'),
-('Funcional', '2025-10-20 14:00'),
-('Step', '2025-10-20 15:00'),
-('Alongamento', '2025-10-20 16:00'),
-('Dança', '2025-10-20 17:00');
+('Yoga', 'Segunda - 14:00'),
+('Spinning', 'Sexta - 19:00'),
+('Crossfit', 'Quinta - 15:00'),
+('Pilates', 'Quinta - 18:00'),
+('Zumba', 'Terça - 13:40'),
+('Boxe', 'Quarta - 19:00'),
+('Funcional', 'Segunda - 16:30'),
+('Step', 'Terça - 17:00'),
+('Alongamento', 'Sexta - 16:00'),
+('Dança', 'Quinta - 14:00');
 
 insert into treino (dias, descricao) values
 (2, 'Treino leve de musculação'),
