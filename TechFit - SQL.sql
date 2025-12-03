@@ -5,23 +5,23 @@ use techfit;
 create table cliente (
     id_cliente int auto_increment primary key,
     nome_cliente varchar(50) not null,
-    cpf varchar(14) not null,
+    cpf_cliente varchar(14) not null,
     data_nascimento date not null,
-    email varchar(50) not null,
-    telefone varchar(15) not null,
-    senha_cliente varchar(100) not null
+    email_cliente varchar(100) not null,
+    telefone_cliente varchar(15) not null,
+    senha_cliente varchar(255) not null
 );
 
 create table funcionario (
     id_funcionario int auto_increment primary key,
     nome_funcionario varchar(50) not null,
-    cpf varchar(14) not null,
+    cpf_funcionario varchar(14) not null,
     cargo varchar(50) not null,
     salario decimal(10,2) not null,
     carga_horaria decimal(5,2),
-    email varchar(50) not null,
-    telefone varchar(15) not null,
-    senha_funcionario varchar(100) not null
+    email_funcionario varchar(100) not null,
+    telefone_funcionario varchar(15) not null,
+    senha_funcionario varchar(255) not null
 );
 
 create table suporte (
@@ -58,10 +58,10 @@ create table treino (
 
 create table avaliacao_fisica (
     id_avaliacao int auto_increment primary key,
-    data date not null,
-    descricao varchar(255),
     id_cliente int not null,
-    id_funcionario int not null
+    id_funcionario int not null,
+    data date not null,
+    descricao varchar(255)
 );
 
 create table faz (
@@ -140,7 +140,7 @@ alter table agendamento
 add constraint fk_agendamento_cliente foreign key (id_cliente) references cliente(id_cliente),
 add constraint fk_agendamento_aula foreign key (id_aula) references aula(id_aula);
 
-insert into cliente (nome_cliente, cpf, data_nascimento, email, telefone, senha_cliente) values
+insert into cliente (nome_cliente, cpf_cliente, data_nascimento, email_cliente, telefone_cliente, senha_cliente) values
 ('Ana Souza', '111.111.111-11', '1990-01-01', 'ana@email.com', '11999990001', 'a1111'),
 ('Bruno Lima', '222.222.222-22', '1985-02-02', 'bruno@email.com', '11999990002', 'b2222'),
 ('Carla Dias', '333.333.333-33', '1992-03-03', 'carla@email.com', '11999990003', 'c3333'),
@@ -152,7 +152,7 @@ insert into cliente (nome_cliente, cpf, data_nascimento, email, telefone, senha_
 ('Isabela Torres', '999.999.999-99', '1994-09-09', 'isabela@email.com', '11999990009', 'i9999'),
 ('João Pereira', '000.000.000-00', '1997-10-10', 'joao@email.com', '11999990010', 'j0000');
 
-insert into funcionario (nome_funcionario, cpf, cargo, salario, carga_horaria, email, telefone, senha_funcionario) values
+insert into funcionario (nome_funcionario, cpf_funcionario, cargo, salario, carga_horaria, email_funcionario, telefone_funcionario, senha_funcionario) values
 ('adm1', '123.456.789-00', 'Instrutor', 2500.00, 40.00, 'adm1@email.com', '11988880001', '1234'),
 ('Patrícia Silva', '234.567.890-11', 'Recepcionista', 1800.00, 36.00, 'patricia@email.com', '11988880002', 'b1234'),
 ('Rafael Costa', '345.678.901-22', 'Personal Trainer', 3000.00, 44.00, 'rafael@email.com', '11988880003', 'c1234'),
