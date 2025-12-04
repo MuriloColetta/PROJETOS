@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="ICONES/icone.png" type="image/x-icon">
+    <title>Bem Vindo à Academia TechFit</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <main>
+        <form action="/submit_login" method="POST">
+            <h2>Bem vindo à</h2>
+            <img src="IMG/logo.png">
+            <div class="linha1">
+                <input type="text" id="username" name="nome-usuario" placeholder="Nome de usuário:" required>
+                <input type="text" id="cpf" name="cpf" placeholder="CPF:" required>
+                <input type="date" id="data-nascimento" name="data-nascimento" placeholder="Data de Nascimento:" required>
+            </div>
+            <div class="linha2">
+                <input type="email" id="email" name="email" placeholder="E-mail:" required>
+                <input type="tel" id="telefone" name="telefone" placeholder="Telefone:" required>
+            </div>
+            <div class="linha3">
+                <input type="password" id="senha" name="senha" placeholder="Senha:" required>
+                <input type="password" id="confirmar-senha" name="senha" placeholder="Confirmar senha:" required>
+                <button onclick="cadastrarUsuario()">Cadastrar-se</button>
+            </div>
+        </form>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
