@@ -7,6 +7,70 @@
     <title>Academia TechFit</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        .notification-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            min-width: 300px;
+            max-width: 500px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+        }
+        .notification-toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .notification-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .notification-error {
+            background-color: #dc3545;
+            color: white;
+        }
+        .notification-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+        .notification-warning {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .notification-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .notification-message {
+            flex: 1;
+            font-weight: 500;
+        }
+        .notification-close {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .notification-close:hover {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -18,6 +82,7 @@
                 <li class="nav-item"><a href="#aulas-coletivas" class="nav-link">Aulas coletivas</a></li>
                 <li class="nav-item"><a href="#avaliacao-fisica" class="nav-link">Avaliação física</a></li>
                 <li class="nav-item"><a href="#suporte" class="nav-link">Suporte</a></li>
+                <li class="nav-item"><button onclick="voltarLogin()" class="nav-link btn-logout">Sair</button></li>
             </ul>
         </nav>
     </header>
@@ -40,19 +105,16 @@
                 <article class="opcao-planos">
                     <img src="IMG/plano-básico.png" alt="Plano Básico">
                     <h3>Preço: R$ 64,90/mês</h3>
-                    <button onclick="assinarPlano()">Assinar</button>
                 </article>
 
                 <article class="opcao-planos">
                     <img src="IMG/plano-plus.png" alt="Plano Essencial">
                     <h3>Preço: R$ 79,90/mês</h3>
-                    <button onclick="assinarPlano()">Assinar</button>
                 </article>
 
                 <article class="opcao-planos">
                     <img src="IMG/plano-premium.png" alt="Plano Premium">
                     <h3>Preço: R$ 120,00/mês</h3>
-                    <button onclick="assinarPlano()">Assinar</button>
                 </article>
             </div>
         </section>
@@ -146,7 +208,7 @@
             </div>
 
             <div class="agendar-aula">
-                <form action="agendar-aula" method="POST">
+                <form action="agendar-aula" method="POST" onsubmit="event.preventDefault(); agendarAula();">
                     <h3>Agendar aula</h3>
                     <input type="text" name="nome_cliente" id="nome_cliente" placeholder="Nome:">
                     <select name="modalidade" id="modalidade">
@@ -160,7 +222,7 @@
                     <select name="horario" id="horario">
                         <option value="" disabled selected>Horário</option>
                     </select>
-                    <button onclick="agendarAula()">Agendar</button>
+                    <button type="button" onclick="agendarAula()">Agendar</button>
                 </form>
 
                 <div class="tabela-horarios">
@@ -215,13 +277,13 @@
             </div>
 
             <div class="agendar-avaliacao">
-                <form action="agendar-avaliacao" method="POS">
+                <form action="agendar-avaliacao" method="POST" onsubmit="event.preventDefault(); agendarAvaliacao();">
                     <h3>Agendar Avaliação</h3>
                     <input type="text" name="nome_cliente" id="nome_cliente" placeholder="Nome:">
                     <input type="text" name="peso_cliente" id="peso_cliente" placeholder="Peso (kg):">
                     <input type="text" name="altura_cliente" id="altura_cliente" placeholder="Altura (m):">
                     <input type="date" name="data_avaliacao" id="data_avaliacao">
-                    <button onclick="agendarAvaliacao()">Agendar Avaliação</button>
+                    <button type="button" onclick="agendarAvaliacao()">Agendar Avaliação</button>
                 </form>
                 <img src="IMG/treinadores.jpg">
             </div>
@@ -312,6 +374,7 @@
         <p>&copy; 2025 Academia TechFit — Todos os direitos reservados.</p>
     </footer>
 
+    <script src="js/Notification.js"></script>
     <script src="script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 </body>

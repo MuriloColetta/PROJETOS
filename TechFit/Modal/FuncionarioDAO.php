@@ -44,7 +44,7 @@ class FuncionarioDAO {
 
     // READ
     public function lerFuncionario() {
-        $stmt = $this->conn->prepare("SELECT * FROM funcionario ORDER BY id_funcionario");
+        $stmt = $this->conn->query("SELECT * FROM funcionario ORDER BY id_funcionario");
 
         $result = [];
 

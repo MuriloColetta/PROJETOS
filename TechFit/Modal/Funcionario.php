@@ -93,5 +93,14 @@ class Funcionario {
         $this->senha_funcionario = $senha_funcionario;
         return $this;
     }
+
+    public function getIdFuncionario() {
+        return $this->id_funcionario;
+    }
+
+    public function setIdFuncionario($id_funcionario): self {
+        $this->id_funcionario = $id_funcionario;
+        return $this;
+    }
 }
 ?>

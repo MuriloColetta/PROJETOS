@@ -71,6 +71,15 @@ class Cliente {
         $this->senha_cliente = $senha_cliente;
         return $this;
     }
+
+    public function getIdCliente() {
+        return $this->id_cliente;
+    }
+
+    public function setIdCliente($id_cliente): self {
+        $this->id_cliente = $id_cliente;
+        return $this;
+    }
 }
 
 ?>

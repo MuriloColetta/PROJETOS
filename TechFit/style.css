@@ -45,6 +45,27 @@ nav a {
     justify-items: right;
 }
 
+.btn-logout {
+    background-color: red !important;
+    color: white !important;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 550;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: rgb(200, 0, 0) !important;
+    transform: scale(1.05);
+    color: white !important;
+}
+
+.btn-logout:active {
+    transform: scale(0.95);
+}
+
 /* ====== SEÇÃO INICIAL ====== */
 .inicial {
     background: url('IMG/tela-inicial.png') no-repeat center center/cover;

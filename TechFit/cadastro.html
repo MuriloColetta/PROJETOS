@@ -6,10 +6,74 @@
     <link rel="shortcut icon" href="ICONES/icone.png" type="image/x-icon">
     <title>Bem Vindo à Academia TechFit</title>
     <link rel="stylesheet" href="login.css">
+    <style>
+        .notification-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            min-width: 300px;
+            max-width: 500px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 10000;
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.3s ease;
+        }
+        .notification-toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .notification-success {
+            background-color: #28a745;
+            color: white;
+        }
+        .notification-error {
+            background-color: #dc3545;
+            color: white;
+        }
+        .notification-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+        .notification-warning {
+            background-color: #ffc107;
+            color: #000;
+        }
+        .notification-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+        .notification-message {
+            flex: 1;
+            font-weight: 500;
+        }
+        .notification-close {
+            background: none;
+            border: none;
+            color: inherit;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .notification-close:hover {
+            opacity: 1;
+        }
+    </style>
 </head>
 <body>
     <main>
-        <form action="/submit_login" method="POST">
+        <form id="form-cadastro" onsubmit="event.preventDefault(); cadastrarUsuario();">
             <h2>Bem vindo à</h2>
             <img src="IMG/logo.png">
             <div class="linha1">
@@ -23,12 +87,13 @@
             </div>
             <div class="linha3">
                 <input type="password" id="senha" name="senha" placeholder="Senha:" required>
-                <input type="password" id="confirmar-senha" name="senha" placeholder="Confirmar senha:" required>
-                <button onclick="cadastrarUsuario()">Cadastrar-se</button>
+                <input type="password" id="confirmar-senha" name="confirmar-senha" placeholder="Confirmar senha:" required>
+                <button type="button" onclick="cadastrarUsuario()">Cadastrar-se</button>
             </div>
         </form>
     </main>
 
+    <script src="js/Notification.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

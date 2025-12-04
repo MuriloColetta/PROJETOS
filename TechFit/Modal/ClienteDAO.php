@@ -15,7 +15,8 @@ class ClienteDAO {
                 nome_cliente VARCHAR(50) NOT NULL,
                 cpf_cliente VARCHAR(14) NOT NULL,
                 data_nascimento DATE NOT NULL,
-                email_cliente VARCHAR(100) NOT NULL,telefone_cliente VARCHAR(15) NOT NULL,
+                email_cliente VARCHAR(100) NOT NULL,
+                telefone_cliente VARCHAR(15) NOT NULL,
                 senha_cliente VARCHAR(255) NOT NULL
             )
         ");
@@ -39,7 +40,7 @@ class ClienteDAO {
 
     // READ
     public function LerCliente() {
-        $stmt = $this->conn->prepare("SELECT * FROM cliente ORDER BY id_cliente");
+        $stmt = $this->conn->query("SELECT * FROM cliente ORDER BY id_cliente");
 
         $result = [];
 
@@ -98,7 +99,7 @@ class ClienteDAO {
                 $row['data_nascimento'],
                 $row['email_cliente'],
                 $row['telefone_cliente'],
-                $row['senha_cliente'],
+                $row['senha_cliente']
             );
         }
         return null;
