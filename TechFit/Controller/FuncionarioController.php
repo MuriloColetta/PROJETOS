@@ -39,6 +39,24 @@ class FuncionarioController {
     public function buscar($nome_funcionario) {
         return $this->dao->buscarFuncionario($nome_funcionario);
     }
+
+    // LOGIN – AUTENTICAÇÃO
+    public function autenticar($nome_funcionario, $senha) {
+        if (empty($nome_funcionario) || empty($senha)) {
+            return "Preencha seu nome_funcionario e senha.";
+        }
+
+        $resultado = $this->dao->autenticar($nome_funcionario, $senha);
+
+        if ($resultado) {
+            session_start();
+            $_SESSION['funcionario'] = $resultado;
+            return true;
+        }
+
+        return "Email ou senha incorretos.";
+    }
+
 }
 
 ?>

@@ -39,6 +39,24 @@ class ClienteController {
     public function buscar($nome_cliente) {
         return $this->dao->buscarCliente($nome_cliente);
     }
+
+    // LOGIN – AUTENTICAÇÃO
+    public function autenticar($nome_cliente, $senha) {
+        if (empty($nome_cliente) || empty($senha)) {
+            return "Preencha todos os campos.";
+        }
+
+        $resultado = $this->dao->autenticar($nome_cliente, $senha);
+
+        if ($resultado) {
+            session_start();
+            $_SESSION['cliente'] = $resultado;
+            return true;  
+        }
+
+        return "Email ou senha incorretos.";
+    }
+
 }
 
 ?>
