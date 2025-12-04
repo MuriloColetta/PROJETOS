@@ -108,6 +108,33 @@ class Controller {
     }
   }
 
+  static async buscarCliente() {
+    const termo = document.getElementById("buscar-cliente-input")?.value.trim();
+    if (!termo) {
+      Notification.warning("Digite um nome para buscar");
+      return;
+    }
+
+    try {
+      const clientes = await Model.getClientes();
+      const resultados = clientes.filter(cliente => 
+        cliente.nome.toLowerCase().includes(termo.toLowerCase()) ||
+        cliente.cpf.includes(termo) ||
+        cliente.email.toLowerCase().includes(termo.toLowerCase())
+      );
+      
+      if (resultados.length === 0) {
+        Notification.info("Nenhum cliente encontrado com esse termo");
+      } else {
+        Notification.success(`${resultados.length} cliente(s) encontrado(s)`);
+      }
+      
+      View.renderClientes(resultados);
+    } catch (error) {
+      Notification.error("Erro ao buscar cliente: " + error.message);
+    }
+  }
+
   // ========== AGENDAMENTOS DE AULAS ==========
   static async carregarAgendamentosAulas() {
     try {
@@ -179,6 +206,38 @@ class Controller {
       }
     } catch (error) {
       Notification.error("Erro: " + error.message);
+    }
+  }
+
+  static async buscarAgendamentoAula() {
+    const termo = document.getElementById("buscar-agendamento-input")?.value.trim();
+    if (!termo) {
+      Notification.warning("Digite um nome para buscar");
+      return;
+    }
+
+    try {
+      const agendamentos = await Model.getAgendamentosAulas();
+      const resultados = agendamentos.filter(agendamento => {
+        const nome = (agendamento.nome_cliente || agendamento.nome || '').toLowerCase();
+        const modalidade = (agendamento.modalidade || '').toLowerCase();
+        const horario = (agendamento.horario || '').toLowerCase();
+        const termoLower = termo.toLowerCase();
+        
+        return nome.includes(termoLower) || 
+               modalidade.includes(termoLower) || 
+               horario.includes(termoLower);
+      });
+      
+      if (resultados.length === 0) {
+        Notification.info("Nenhum agendamento encontrado com esse termo");
+      } else {
+        Notification.success(`${resultados.length} agendamento(s) encontrado(s)`);
+      }
+      
+      View.renderAgendamentosAulas(resultados);
+    } catch (error) {
+      Notification.error("Erro ao buscar agendamento: " + error.message);
     }
   }
 
@@ -256,6 +315,38 @@ class Controller {
       }
     } catch (error) {
       Notification.error("Erro: " + error.message);
+    }
+  }
+
+  static async buscarAvaliacao() {
+    const termo = document.getElementById("buscar-avaliacao-input")?.value.trim();
+    if (!termo) {
+      Notification.warning("Digite um nome para buscar");
+      return;
+    }
+
+    try {
+      const avaliacoes = await Model.getAgendamentosAvaliacoes();
+      const resultados = avaliacoes.filter(avaliacao => {
+        const nome = (avaliacao.nome_cliente || avaliacao.nome || '').toLowerCase();
+        const peso = (avaliacao.peso || avaliacao.peso_cliente || '').toString();
+        const altura = (avaliacao.altura || avaliacao.altura_cliente || '').toString();
+        const termoLower = termo.toLowerCase();
+        
+        return nome.includes(termoLower) || 
+               peso.includes(termo) || 
+               altura.includes(termo);
+      });
+      
+      if (resultados.length === 0) {
+        Notification.info("Nenhuma avaliação encontrada com esse termo");
+      } else {
+        Notification.success(`${resultados.length} avaliação(ões) encontrada(s)`);
+      }
+      
+      View.renderAvaliacoes(resultados);
+    } catch (error) {
+      Notification.error("Erro ao buscar avaliação: " + error.message);
     }
   }
 

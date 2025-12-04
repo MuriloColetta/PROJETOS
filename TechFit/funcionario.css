@@ -143,3 +143,51 @@ table {
     margin-top: 50px;
     color: gray;
 }
+
+.busca {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.busca input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #555;
+  background-color: #242424;
+  color: white;
+}
+
+.busca button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+
+.busca button[type="submit"] {
+  background-color: #28a745;
+  color: white;
+}
+
+.busca button[type="submit"]:hover {
+  background-color: #218838;
+  transform: scale(1.05);
+}
+
+.busca button[type="button"] {
+  background-color: #6c757d;
+  color: white;
+}
+
+.busca button[type="button"]:hover {
+  background-color: #5a6268;
+  transform: scale(1.05);
+}

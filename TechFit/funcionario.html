@@ -300,9 +300,10 @@ table {
           </div>
         </form>
 
-        <form action="" method="POST" class="busca">
-          <input type="text" name="buscar_cliente" placeholder="Buscar cliente por nome:">
+        <form class="busca" onsubmit="event.preventDefault(); Controller.buscarCliente();">
+          <input type="text" id="buscar-cliente-input" placeholder="Buscar cliente por nome:">
           <button type="submit">Buscar</button>
+          <button type="button" onclick="Controller.carregarClientes(); document.getElementById('buscar-cliente-input').value = '';">Limpar</button>
         </form>
 
         <h4>Clientes Registrados</h4>
@@ -404,9 +405,10 @@ table {
           </div>
         </form>
 
-        <form action="" method="POST" class="busca">
-          <input type="text" name="buscar_agendamento" placeholder="Buscar agendamento de aula por id do cliente:">
+        <form class="busca" onsubmit="event.preventDefault(); Controller.buscarAgendamentoAula();">
+          <input type="text" id="buscar-agendamento-input" placeholder="Buscar agendamento de aula por nome do cliente:">
           <button type="submit">Buscar</button>
+          <button type="button" onclick="Controller.carregarAgendamentosAulas(); document.getElementById('buscar-agendamento-input').value = '';">Limpar</button>
         </form>
 
         <h4>Agendamentos de aulas</h4>
@@ -449,13 +451,10 @@ table {
           </div>
         </form>
 
-        <form action="" method="POST"  class="row g-3 mb-4">
-          <div class="col-md-5">
-            <input type="text" name="buscar" placeholder="Buscar treino por id do cliente" required>
-          </div>
-          <div class="col-md-2">
-            <button type="submit">Buscar</button>
-          </div>
+        <form class="busca" onsubmit="event.preventDefault(); Controller.buscarAvaliacao();">
+          <input type="text" id="buscar-avaliacao-input" placeholder="Buscar avaliação por nome do cliente:">
+          <button type="submit">Buscar</button>
+          <button type="button" onclick="Controller.carregarAvaliacoes(); document.getElementById('buscar-avaliacao-input').value = '';">Limpar</button>
         </form>
 
         <h4>Avaliações Físicas</h4>
