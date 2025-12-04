@@ -1,146 +1,149 @@
-create database techfit;
+CREATE DATABASE techfit;
 
-use techfit;
+USE techfit;
 
-create table cliente (
-    id_cliente int auto_increment primary key,
-    nome_cliente varchar(50) not null,
-    cpf_cliente varchar(14) not null,
-    data_nascimento date not null,
-    email_cliente varchar(100) not null,
-    telefone_cliente varchar(15) not null,
-    senha_cliente varchar(255) not null
+CREATE TABLE cliente (
+    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
+    nome_cliente VARCHAR(50) NOT NULL,
+    cpf_cliente VARCHAR(14) NOT NULL,
+    data_nascimento date NOT NULL,
+    email_cliente VARCHAR(100) NOT NULL,
+    telefone_cliente VARCHAR(15) NOT NULL,
+    senha_cliente VARCHAR(255) NOT NULL
 );
 
-create table funcionario (
-    id_funcionario int auto_increment primary key,
-    nome_funcionario varchar(50) not null,
-    cpf_funcionario varchar(14) not null,
-    cargo varchar(50) not null,
-    salario decimal(10,2) not null,
-    carga_horaria decimal(5,2),
-    email_funcionario varchar(100) not null,
-    telefone_funcionario varchar(15) not null,
-    senha_funcionario varchar(255) not null
+CREATE TABLE funcionario (
+    id_funcionario INT AUTO_INCREMENT PRIMARY KEY,
+    nome_funcionario VARCHAR(50) NOT NULL,
+    cpf_funcionario VARCHAR(14) NOT NULL,
+    cargo VARCHAR(50) NOT NULL,
+    salario DECIMAL(10,2) NOT NULL,
+    carga_horaria DECIMAL(5,2),
+    email_funcionario VARCHAR(100) NOT NULL,
+    telefone_funcionario VARCHAR(15) NOT NULL,
+    senha_funcionario VARCHAR(255) NOT NULL
 );
 
-create table suporte (
-    id_suporte int auto_increment primary key,
-    descricao varchar(255) not null,
-    categoria varchar(50) not null,
-    status_suporte varchar(10) default 'ativo'
+CREATE TABLE suporte (
+    id_suporte INT AUTO_INCREMENT PRIMARY KEY,
+    descricao VARCHAR(255) NOT NULL,
+    categoria VARCHAR(50) NOT NULL,
+    status_suporte VARCHAR(10) DEFAULT 'ativo'
 );
 
-create table plano (
-    id_plano int auto_increment primary key,
-    nome_plano varchar(50) not null,
-    preco decimal(10,2) not null,
-    descricao varchar(255) not null
+CREATE TABLE plano (
+    id_plano INT AUTO_INCREMENT PRIMARY KEY,
+    nome_plano VARCHAR(50) NOT NULL,
+    preco DECIMAL(10,2) NOT NULL,
+    descricao VARCHAR(255) NOT NULL
 );
 
-create table filiais (
-    id_filiais int auto_increment primary key,
-    cnpj varchar(18) not null,
-    endereco varchar(255) not null
+CREATE TABLE filiais (
+    id_filiais INT AUTO_INCREMENT PRIMARY KEY,
+    cnpj VARCHAR(18) NOT NULL,
+    endereco VARCHAR(255) NOT NULL
 );
 
-create table aula (
-    id_aula int auto_increment primary key,
-    modalidade varchar(50) not null,
-    data_hora varchar(50) not null
+CREATE TABLE aula (
+    id_aula INT AUTO_INCREMENT PRIMARY KEY,
+    modalidade VARCHAR(50) NOT NULL,
+    data_hora VARCHAR(50) NOT NULL
 );
 
-create table treino (
-    id_treino int auto_increment primary key,
-    descricao varchar(255) not null,
-    dias int not null
+CREATE TABLE treino (
+    id_treino INT AUTO_INCREMENT PRIMARY KEY,
+    nome_treino VARCHAR(50),
+    descricao VARCHAR(255) NOT NULL,
+    dias INT NOT NULL
 );
 
-create table avaliacao_fisica (
-    id_avaliacao int auto_increment primary key,
-    id_cliente int not null,
-    id_funcionario int not null,
-    data date not null,
-    descricao varchar(255)
+CREATE TABLE avaliacao_fisica (
+    id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
+    id_cliente INT NOT NULL,
+    id_funcionario INT NOT NULL,
+    peso_cliente DECIMAL(5,2),
+    altura_cliente DECIMAL(4,2),
+    data_avaliacao DATE NOT NULL,
+    descricao VARCHAR(255)
 );
 
-create table faz (
-    id_cliente int not null,
-    id_treino int not null,
-    primary key (id_cliente, id_treino)
+CREATE TABLE assinatura (
+    id_cliente INT NOT NULL,
+    id_plano INT NOT NULL,
+    PRIMARY KEY (id_cliente, id_plano)
 );
 
-create table pertence (
-    id_funcionario int not null,
-    id_filiais int not null,
-    primary key (id_funcionario, id_filiais)
+CREATE TABLE pertence (
+    id_funcionario INT NOT NULL,
+    id_filiais INT NOT NULL,
+    PRIMARY KEY (id_funcionario, id_filiais)
 );
 
-create table tem (
-    id_filiais int not null,
-    id_plano int not null,
-    primary key (id_filiais, id_plano)
+CREATE TABLE tem (
+    id_filiais INT NOT NULL,
+    id_plano INT NOT NULL,
+    PRIMARY KEY (id_filiais, id_plano)
 );
 
-create table possui (
-    id_filiais int not null,
-    id_suporte int not null,
-    primary key (id_filiais, id_suporte)
+CREATE TABLE possui (
+    id_filiais INT NOT NULL,
+    id_suporte INT NOT NULL,
+    PRIMARY KEY (id_filiais, id_suporte)
 );
 
-create table usa (
-    id_funcionario int not null,
-    id_treino int not null,
-    primary key (id_funcionario, id_treino)
+CREATE TABLE usa (
+    id_funcionario INT NOT NULL,
+    id_treino INT NOT NULL,
+    PRIMARY KEY (id_funcionario, id_treino)
 );
 
-create table acesso (
-    id_acesso int auto_increment primary key,
-    data date not null,
-    id_cliente int not null,
-    id_filiais int not null
+CREATE TABLE acesso (
+    id_acesso INT AUTO_INCREMENT PRIMARY KEY,
+    data date NOT NULL,
+    id_cliente INT NOT NULL,
+    id_filiais INT NOT NULL
 );
 
-create table agendamento (
-    id_agendamento int auto_increment primary key,
-    status_agendamento varchar(20),
-    id_cliente int not null,
-    id_aula int not null
+CREATE TABLE agendamento (
+    id_agendamento INT AUTO_INCREMENT PRIMARY KEY,
+    status_agendamento VARCHAR(20) DEFAULT 'Agendado',
+    id_cliente INT NOT NULL,
+    id_aula INT NOT NULL
 );
 
-alter table avaliacao_fisica
-add constraint fk_avaliacao_cliente foreign key (id_cliente) references cliente(id_cliente),
-add constraint fk_avaliacao_funcionario foreign key (id_funcionario) references funcionario(id_funcionario);
+ALTER TABLE avaliacao_fisica
+ADD CONSTRAINT fk_avaliacao_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+ADD CONSTRAINT fk_avaliacao_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario);
 
-alter table faz
-add constraint fk_faz_cliente foreign key (id_cliente) references cliente(id_cliente),
-add constraint fk_faz_treino foreign key (id_treino) references treino(id_treino);
+ALTER TABLE assinatura
+ADD CONSTRAINT fk_assinatura_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+ADD CONSTRAINT fk_assinatura_treino FOREIGN KEY (id_plano) REFERENCES treino(id_plano);
 
-alter table pertence
-add constraint fk_pertence_funcionario foreign key (id_funcionario) references funcionario(id_funcionario),
-add constraint fk_pertence_filiais foreign key (id_filiais) references filiais(id_filiais);
+ALTER TABLE pertence
+ADD CONSTRAINT fk_pertence_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario),
+ADD CONSTRAINT fk_pertence_filiais FOREIGN KEY (id_filiais) REFERENCES filiais(id_filiais);
 
-alter table tem
-add constraint fk_tem_filiais foreign key (id_filiais) references filiais(id_filiais),
-add constraint fk_tem_plano foreign key (id_plano) references plano(id_plano);
+ALTER TABLE tem
+ADD CONSTRAINT fk_tem_filiais FOREIGN KEY (id_filiais) REFERENCES filiais(id_filiais),
+ADD CONSTRAINT fk_tem_plano FOREIGN KEY (id_plano) REFERENCES plano(id_plano);
 
-alter table possui
-add constraint fk_possui_filiais foreign key (id_filiais) references filiais(id_filiais),
-add constraint fk_possui_suporte foreign key (id_suporte) references suporte(id_suporte);
+ALTER TABLE possui
+ADD CONSTRAINT fk_possui_filiais FOREIGN KEY (id_filiais) REFERENCES filiais(id_filiais),
+ADD CONSTRAINT fk_possui_suporte FOREIGN KEY (id_suporte) REFERENCES suporte(id_suporte);
 
-alter table usa
-add constraint fk_usa_funcionario foreign key (id_funcionario) references funcionario(id_funcionario),
-add constraint fk_usa_treino foreign key (id_treino) references treino(id_treino);
+ALTER TABLE usa
+ADD CONSTRAINT fk_usa_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario),
+ADD CONSTRAINT fk_usa_treino FOREIGN KEY (id_treino) REFERENCES treino(id_treino);
 
-alter table acesso
-add constraint fk_acesso_cliente foreign key (id_cliente) references cliente(id_cliente),
-add constraint fk_acesso_filiais foreign key (id_filiais) references filiais(id_filiais);
+ALTER TABLE acesso
+ADD CONSTRAINT fk_acesso_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+ADD CONSTRAINT fk_acesso_filiais FOREIGN KEY (id_filiais) REFERENCES filiais(id_filiais);
 
-alter table agendamento
-add constraint fk_agendamento_cliente foreign key (id_cliente) references cliente(id_cliente),
-add constraint fk_agendamento_aula foreign key (id_aula) references aula(id_aula);
+ALTER TABLE agendamento
+ADD CONSTRAINT fk_agendamento_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
+ADD CONSTRAINT fk_agendamento_aula FOREIGN KEY (id_aula) REFERENCES aula(id_aula);
 
-insert into cliente (nome_cliente, cpf_cliente, data_nascimento, email_cliente, telefone_cliente, senha_cliente) values
+INSERT INTO cliente (nome_cliente, cpf_cliente, data_nascimento, email_cliente, telefone_cliente, senha_cliente) VALUES
 ('Ana Souza', '111.111.111-11', '1990-01-01', 'ana@email.com', '11999990001', 'a1111'),
 ('Bruno Lima', '222.222.222-22', '1985-02-02', 'bruno@email.com', '11999990002', 'b2222'),
 ('Carla Dias', '333.333.333-33', '1992-03-03', 'carla@email.com', '11999990003', 'c3333'),
@@ -152,7 +155,7 @@ insert into cliente (nome_cliente, cpf_cliente, data_nascimento, email_cliente, 
 ('Isabela Torres', '999.999.999-99', '1994-09-09', 'isabela@email.com', '11999990009', 'i9999'),
 ('João Pereira', '000.000.000-00', '1997-10-10', 'joao@email.com', '11999990010', 'j0000');
 
-insert into funcionario (nome_funcionario, cpf_funcionario, cargo, salario, carga_horaria, email_funcionario, telefone_funcionario, senha_funcionario) values
+INSERT INTO funcionario (nome_funcionario, cpf_funcionario, cargo, salario, carga_horaria, email_funcionario, telefone_funcionario, senha_funcionario) VALUES
 ('adm1', '123.456.789-00', 'Instrutor', 2500.00, 40.00, 'adm1@email.com', '11988880001', '1234'),
 ('Patrícia Silva', '234.567.890-11', 'Recepcionista', 1800.00, 36.00, 'patricia@email.com', '11988880002', 'b1234'),
 ('Rafael Costa', '345.678.901-22', 'Personal Trainer', 3000.00, 44.00, 'rafael@email.com', '11988880003', 'c1234'),
@@ -164,7 +167,7 @@ insert into funcionario (nome_funcionario, cpf_funcionario, cargo, salario, carg
 ('Pedro Nunes', '901.234.567-88', 'Personal Trainer', 3000.00, 44.00, 'pedro@email.com', '11988880009', 'i1234'),
 ('Juliana Almeida', '012.345.678-99', 'Instrutora', 2500.00, 40.00, 'juliana@email.com', '11988880010', 'j1234');
 
-insert into suporte (descricao, categoria, status_suporte) values
+INSERT INTO suporte (descricao, categoria, status_suporte) VALUES
 ('Problema com catraca', 'Equipamento', 'ativo'),
 ('Falha no sistema', 'TI', 'ativo'),
 ('Limpeza urgente', 'Serviços Gerais', 'ativo'),
@@ -176,7 +179,7 @@ insert into suporte (descricao, categoria, status_suporte) values
 ('Bebedouro sem água', 'Infraestrutura', 'ativo'),
 ('Problema no Wi-Fi', 'TI', 'ativo');
 
-insert into plano (nome_plano, preco, descricao) values
+INSERT INTO plano (nome_plano, preco, descricao) VALUES
 ('Básico', 99.90, 'Acesso livre à academia'),
 ('Intermediário', 149.90, 'Acesso + aulas coletivas'),
 ('Premium', 199.90, 'Acesso total + personal'),
@@ -206,7 +209,7 @@ INSERT INTO filiais (cnpj, endereco) VALUES
 ('56.789.012/0001-05', 'Rua Prefeito Dr. Alberto Ferreira, 520 – Boa Vista');
 
 
-insert into aula (modalidade, data_hora) values
+INSERT INTO aula (modalidade, data_hora) VALUES
 ('Yoga', 'Segunda - 14:00'),
 ('Spinning', 'Sexta - 19:00'),
 ('Crossfit', 'Quinta - 15:00'),
@@ -218,31 +221,31 @@ insert into aula (modalidade, data_hora) values
 ('Alongamento', 'Sexta - 16:00'),
 ('Dança', 'Quinta - 14:00');
 
-insert into treino (dias, descricao) values
-(2, 'Treino leve de musculação'),
-(3, 'Treino intermediário'),
-(5, 'Treino avançado'),
-(4, 'Cardio rápido'),
-(3, 'Treino de resistência'),
-(3, 'Treino funcional'),
-(4, 'Treino de força'),
-(5, 'Treino para emagrecimento'),
-(3, 'Treino de alto rendimento'),
-(2, 'Treino regenerativo');
+INSERT INTO treino (nome_treino, dias, descricao) VALUES
+('Iniciante', 2, 'Treino leve de musculação'),
+('Intermediario', 3, 'Treino intermediário'),
+('Avancado', 5, 'Treino avançado'),
+('Rendimento', 4, 'Cardio rápido'),
+('Resistência', 3, 'Treino de resistência'),
+('Funcional', 3, 'Treino funcional'),
+('Força', 4, 'Treino de força'),
+('Emagrecimento', 5, 'Treino para emagrecimento'),
+('Alto rendimento', 3, 'Treino de alto rendimento'),
+('Regenerativo', 2, 'Treino regenerativo');
 
-insert into avaliacao_fisica (data, descricao, id_cliente, id_funcionario) values
-('2025-10-01', 'Avaliação inicial', 1, 1),
-('2025-10-02', 'Avaliação inicial', 2, 2),
-('2025-10-03', 'Avaliação inicial', 3, 3),
-('2025-10-04', 'Avaliação inicial', 4, 4),
-('2025-10-05', 'Avaliação inicial', 5, 5),
-('2025-10-06', 'Avaliação inicial', 6, 6),
-('2025-10-07', 'Avaliação inicial', 7, 7),
-('2025-10-08', 'Avaliação inicial', 8, 8),
-('2025-10-09', 'Avaliação inicial', 9, 9),
-('2025-10-10', 'Avaliação inicial', 10, 10);
+INSERT INTO avaliacao_fisica (data_avaliacao, descricao, id_cliente, id_funcionario, peso_cliente, altura_cliente) VALUES
+('2025-10-01', 'Avaliação inicial', 1, 1, 70.00, 1.75),
+('2025-10-02', 'Avaliação inicial', 2, 2, 80.00, 1.80),
+('2025-10-03', 'Avaliação inicial', 3, 3, 65.00, 1.65),
+('2025-10-04', 'Avaliação inicial', 4, 4, 90.00, 1.85),
+('2025-10-05', 'Avaliação inicial', 5, 5, 75.00, 1.70),
+('2025-10-06', 'Avaliação inicial', 6, 6, 85.00, 1.78),
+('2025-10-07', 'Avaliação inicial', 7, 7, 68.00, 1.72),
+('2025-10-08', 'Avaliação inicial', 8, 8, 95.00, 1.90),
+('2025-10-09', 'Avaliação inicial', 9, 9, 78.00, 1.76),
+('2025-10-10', 'Avaliação inicial', 10, 10, 82.00, 1.82);
 
-insert into agendamento (status_agendamento, id_cliente, id_aula) values
+INSERT INTO agendamento (status_agendamento, id_cliente, id_aula) VALUES
 ('Agendado', 1, 1),
 ('Agendado', 2, 2),
 ('Agendado', 3, 3),
