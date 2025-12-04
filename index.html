@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TechFit — Sistema (HTML Demo)</title>
+  <style>
+    :root{--bg:#f4f6f9;--card:#fff;--muted:#666;--accent:#1e90ff;--danger:#e53e3e}
+    *{box-sizing:border-box;font-family:Inter,Segoe UI,Roboto,Arial,sans-serif}
+    body{margin:0;background:var(--bg);color:#222}
+    header{background:#0b3b66;color:white;padding:12px 20px;display:flex;align-items:center;justify-content:space-between}
+    header h1{margin:0;font-size:18px}
+    nav a{color:white;text-decoration:none;margin-left:12px;font-weight:600}
+    .container{max-width:1100px;margin:22px auto;padding:0 16px}
+    .card{background:var(--card);border-radius:10px;padding:18px;box-shadow:0 6px 18px rgba(15,20,30,0.06);margin-bottom:18px}
+    .grid{display:grid;gap:14px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .btn{display:inline-block;padding:8px 12px;border-radius:8px;background:var(--accent);color:white;text-decoration:none;border:none;cursor:pointer}
+    .btn.ghost{background:transparent;color:var(--accent);border:1px solid rgba(30,144,255,0.12)}
+    .small{font-size:13px;color:var(--muted)}
+    input,select,textarea{width:100%;padding:8px;border-radius:8px;border:1px solid #e6e9ef}
+    table{width:100%;border-collapse:collapse}
+    th,td{padding:10px;border-bottom:1px solid #eef2f6;text-align:left}
+    th{background:#fbfdff}
+    .actions button{margin-right:8px}
+    .view{display:none}
+    .view.active{display:block}
+    .topbar{display:flex;gap:12px;align-items:center}
+    .qr{width:160px;height:160px;background:linear-gradient(135deg,#eef7ff,#dbefff);display:flex;align-items:center;justify-content:center;border-radius:8px;font-weight:700;color:#145ea8}
+    .kpi{display:flex;gap:12px}
+    .kpi .item{flex:1;background:#fff;padding:12px;border-radius:10px}
+    footer{font-size:13px;color:var(--muted);text-align:center;margin:30px 0}
+    @media (max-width:800px){.grid.cols-3{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TechFit — Sistema</h1>
+    <nav id="nav-main">
+      <a href="#" data-view="home">Início</a>
+      <a href="#" data-view="agenda">Agenda</a>
+      <a href="#" data-view="turmas">Turmas</a>
+      <a href="#" data-view="avaliacoes">Avaliações</a>
+      <a href="#" data-view="comunicacao">Comunicação</a>
+      <a href="#" data-view="acesso">Controle de Acesso</a>
+      <a href="#" data-view="admin">Painel Admin</a>
+    </nav>
+  </header>
+
+  <main class="container">
+
+    <!-- LOGIN / PROFILE BAR (top) -->
+    <div class="card topbar" style="justify-content:space-between;align-items:center">
+      <div style="display:flex;gap:12px;align-items:center">
+        <img src="" alt="avatar" id="avatar" style="width:56px;height:56px;border-radius:50%;background:#ddd">
+        <div>
+          <div id="userName" style="font-weight:700">Aluno Demo</div>
+          <div class="small">Plano: Mensal — Filial: Centro</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="btn" id="btn-logout">Sair</button>
+      </div>
+    </div>
+
+    <!-- HOME / DASHBOARD -->
+    <section id="view-home" class="view active">
+      <div class="grid cols-3">
+        <div class="card">
+          <h3>Próximas Aulas</h3>
+          <ul id="nextClasses" style="padding-left:16px;margin-top:8px">
+            <li>Spinning — 04/12/2025 18:00 — Sala A</li>
+            <li>Funcional — 05/12/2025 07:00 — Sala B</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Meu QR de Acesso</h3>
+          <div style="display:flex;gap:12px;align-items:center;margin-top:8px">
+            <div class="qr">QR<br>Demo</div>
+            <div class="small">Validade: 31/12/2025<br><button class="btn ghost" onclick="downloadQR()">Baixar PNG</button></div>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Notificações</h3>
+          <div class="small">Você não tem novas notificações.</div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:14px">
+        <h3>KPIs Rápidos</h3>
+        <div class="kpi" style="margin-top:10px">
+          <div class="item"><strong>75%</strong><div class="small">Taxa média de ocupação</div></div>
+          <div class="item"><strong>320</strong><div class="small">Entradas hoje</div></div>
+          <div class="item"><strong>12</strong><div class="small">Alunos com avaliação pendente</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AGENDA (Buscar e reservar aulas) -->
+    <section id="view-agenda" class="view">
+      <div class="card">
+        <h2>Agenda de Aulas</h2>
+        <div style="display:flex;gap:12px;margin-top:8px">
+          <input type="date" id="agenda-date" value="2025-12-04">
+          <select id="agenda-filial"><option>Todas as filiais</option><option>Centro</option><option>Norte</option></select>
+          <button class="btn" onclick="loadAgenda()">Buscar</button>
+        </div>
+        <div style="margin-top:14px">
+          <table>
+            <thead><tr><th>Horário</th><th>Modalidade</th><th>Professor</th><th>Local</th><th>Vagas</th><th></th></tr></thead>
+            <tbody id="agenda-table">
+              <tr><td>18:00</td><td>Spinning</td><td>Mariana</td><td>Sala A</td><td>3/20</td><td><button class="btn" onclick="reserve(1)">Reservar</button></td></tr>
+              <tr><td>19:00</td><td>Funcional</td><td>Carlos</td><td>Sala B</td><td>20/20</td><td><button class="btn ghost" onclick="joinWaitlist(2)">Entrar Lista</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- TURMAS (detalhes e gerenciamento pelo instrutor) -->
+    <section id="view-turmas" class="view">
+      <div class="card">
+        <h2>Turmas</h2>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="small">Filtrar por modalidade / professor</div>
+          <button class="btn" onclick="openCreateTurma()">Criar Turma</button>
+        </div>
+        <div style="margin-top:12px">
+          <table>
+            <thead><tr><th>Modalidade</th><th>Professor</th><th>Dia / Horário</th><th>Capacidade</th><th>Ocupação</th><th>Ações</th></tr></thead>
+            <tbody>
+              <tr><td>Spinning</td><td>Mariana</td><td>Seg/Qua 18:00</td><td>20</td><td>15</td><td class="actions"><button class="btn ghost" onclick="viewClass(1)">Detalhes</button><button class="btn" onclick="manageAttendance(1)">Presenças</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- AVALIAÇÕES -->
+    <section id="view-avaliacoes" class="view">
+      <div class="card">
+        <h2>Avaliações Físicas</h2>
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div class="small">Registre e acompanhe a evolução dos alunos</div>
+          <button class="btn" onclick="openNovaAvaliacao()">Nova Avaliação</button>
+        </div>
+        <div style="margin-top:12px">
+          <table>
+            <thead><tr><th>Aluno</th><th>Data</th><th>Peso</th><th>IMC</th><th>Observações</th><th></th></tr></thead>
+            <tbody>
+              <tr><td>João Silva</td><td>01/11/2025</td><td>82 kg</td><td>26.4</td><td>Perda de 1kg</td><td><button class="btn ghost">Ver gráfico</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMUNICAÇÃO -->
+    <section id="view-comunicacao" class="view">
+      <div class="card">
+        <h2>Comunicação</h2>
+        <form onsubmit="event.preventDefault();sendCampanha()">
+          <div style="display:flex;gap:12px">
+            <input placeholder="Título" required id="com-titulo">
+            <select id="com-tipo"><option value="push">Push</option><option value="email">E-mail</option><option value="sms">SMS</option></select>
+          </div>
+          <div style="margin-top:8px"><textarea id="com-corpo" rows="4" placeholder="Mensagem..."></textarea></div>
+          <div style="margin-top:8px;display:flex;gap:8px;align-items:center">
+            <label class="small">Segmentação:</label>
+            <select id="com-seg"><option value="all">Todos</option><option value="modalidade:1">Spinning</option></select>
+            <button class="btn" type="submit">Enviar</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- CONTROLE DE ACESSO -->
+    <section id="view-acesso" class="view">
+      <div class="card">
+        <h2>Controle de Acesso</h2>
+        <div style="display:flex;gap:12px;align-items:center">
+          <label class="small">Registrar entrada (simulação)</label>
+          <input placeholder="ID do aluno" id="acesso-aluno-id" style="width:120px">
+          <select id="acesso-metodo"><option value="qr">QR</option><option value="biometria">Biometria</option></select>
+          <button class="btn" onclick="registrarAcesso()">Registrar</button>
+        </div>
+        <div style="margin-top:12px">
+          <h4>Últimos acessos</h4>
+          <table>
+            <thead><tr><th>Aluno</th><th>Filial</th><th>Método</th><th>Data/Hora</th></tr></thead>
+            <tbody>
+              <tr><td>João Silva</td><td>Centro</td><td>QR</td><td>04/12/2025 08:12</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAINEL ADMIN -->
+    <section id="view-admin" class="view">
+      <div class="card">
+        <h2>Painel Administrativo</h2>
+        <div style="display:flex;gap:12px;margin-top:8px">
+          <button class="btn" onclick="openManage('alunos')">Gerenciar Alunos</button>
+          <button class="btn ghost" onclick="openManage('turmas')">Gerenciar Turmas</button>
+          <button class="btn ghost" onclick="openManage('relatorios')">Relatórios</button>
+        </div>
+
+        <div id="admin-content" style="margin-top:12px">
+          <h3>Resumo</h3>
+          <div class="small">Use os botões acima para acessar áreas administrativas. Este demo contém as principais telas em HTML estático.</div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="small">Demo simplificado — TechFit (HTML) • Gerado automaticamente</footer>
+  </main>
+
+  <script>
+
+    document.querySelectorAll('[data-view]').forEach(a=>a.addEventListener('click',e=>{
+      e.preventDefault(); const v=a.dataset.view; showView(v);
+    }));
+    function showView(id){
+      document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
+      const el=document.getElementById('view-'+id);
+      if(el) el.classList.add('active');
+      else document.getElementById('view-home').classList.add('active');
+      window.scrollTo({top:0,behavior:'smooth'});
+    }
+
+
+    function loadAgenda(){ alert('Buscar agenda: ' + document.getElementById('agenda-date').value); }
+    function reserve(id){ alert('Reserva enviada (demo) para turma id='+id); }
+    function joinWaitlist(id){ alert('Adicionado à lista de espera (demo) para turma id='+id); }
+    function downloadQR(){ alert('Baixando QR (simulação)'); }
+    function openCreateTurma(){ alert('Abrir modal criar turma (demo)'); }
+    function viewClass(id){ alert('Abrir detalhes turma '+id); }
+    function manageAttendance(id){ alert('Gerenciar presenças turma '+id); }
+    function openNovaAvaliacao(){ alert('Formulário nova avaliação (demo)'); }
+    function sendCampanha(){ alert('Campanha enfileirada (demo)'); }
+    function registrarAcesso(){ const id=document.getElementById('acesso-aluno-id').value; const m=document.getElementById('acesso-metodo').value; alert('Acesso registrado (demo): aluno='+id+' metodo='+m); }
+    function openManage(key){ document.getElementById('admin-content').innerHTML = '<h3>'+key.charAt(0).toUpperCase()+key.slice(1)+'</h3><div class="small">Área administrativa: '+key+' (demo)</div>'; }
+
+    document.getElementById('btn-logout').addEventListener('click',()=>{alert('Logout (demo)')});
+
+
+    function init(){ /* placeholder */ }
+    init();
+  </script>
+</body>
+</html>
