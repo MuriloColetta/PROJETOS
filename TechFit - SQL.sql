@@ -106,7 +106,7 @@ CREATE TABLE acesso (
 
 CREATE TABLE agendamento (
     id_agendamento INT AUTO_INCREMENT PRIMARY KEY,
-    status_agendamento VARCHAR(20) DEFAULT 'Agendado',
+    data_agendamento DATE NOT NULL,
     id_cliente INT NOT NULL,
     id_aula INT NOT NULL
 );
@@ -245,14 +245,14 @@ INSERT INTO avaliacao_fisica (data_avaliacao, descricao, id_cliente, id_funciona
 ('2025-10-09', 'Avaliação inicial', 9, 9, 78.00, 1.76),
 ('2025-10-10', 'Avaliação inicial', 10, 10, 82.00, 1.82);
 
-INSERT INTO agendamento (status_agendamento, id_cliente, id_aula) VALUES
-('Agendado', 1, 1),
-('Agendado', 2, 2),
-('Agendado', 3, 3),
-('Agendado', 4, 4),
-('Agendado', 5, 5),
-('Agendado', 6, 6),
-('Agendado', 7, 7),
-('Agendado', 8, 8),
-('Agendado', 9, 9),
-('Agendado', 10, 10);
+INSERT INTO agendamento (data_agendamento, id_cliente, id_aula) VALUES
+('2025-11-14', 1, 1),
+('2025-12-03', 2, 2),
+('2025-11-23', 3, 3),
+('2025-11-03', 4, 4),
+('2025-09-13', 5, 5),
+('2025-10-23', 6, 6),
+('2025-10-01', 7, 7),
+('2025-10-10', 8, 8),
+('2025-08-03', 9, 9),
+('2025-10-02', 10, 10);
