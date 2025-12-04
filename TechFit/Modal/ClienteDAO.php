@@ -44,7 +44,8 @@ class ClienteDAO {
         $result = [];
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $result[$row['nome_cliente']] = new Cliente(
+            $result[$row['id_cliente']] = new Cliente(
+                $row['id_cliente'],
                 $row['nome_cliente'],
                 $row['cpf_cliente'],
                 $row['data_nascimento'],
@@ -84,13 +85,14 @@ class ClienteDAO {
     }
 
     // BUSCAR POR NOME CLIENTE
-    public function buscarPorNomeCliente($nome_cliente) {
+    public function buscarCliente($nome_cliente) {
         $stmt = $this->conn->prepare("SELECT * FROM cliente WHERE nome_cliente = :nome_cliente");
         $stmt->execute([':nome_cliente' => $nome_cliente]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
             return new Cliente(
+                $row['id_cliente'],
                 $row['nome_cliente'],
                 $row['cpf_cliente'],
                 $row['data_nascimento'],

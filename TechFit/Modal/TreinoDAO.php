@@ -12,6 +12,7 @@ class TreinoDAO {
         $this->conn->exec("
             CREATE TABLE IF NOT EXISTS treino (
                 id_treino INT AUTO_INCREMENT PRIMARY KEY,
+                nome_treino VARCHAR(50) NOT NULL,
                 descricao VARCHAR(255) NOT NULL,
                 dias INT NOT NULL
             )
@@ -21,10 +22,11 @@ class TreinoDAO {
     // CREATE
     public function criarTreino(Treino $treino) {
         $stmt = $this->conn->prepare("
-            INSERT INTO treino (descricao, dias)
-            VALUES (:descricao, :dias)
+            INSERT INTO treino (nome_treino, descricao, dias)
+            VALUES (:nome_treino, :descricao, :dias)
         ");
         $stmt->execute([
+            ':nome_treino' => $treino->getNomeTreino(),
             ':descricao' => $treino->getDescricao(),
             ':dias' => $treino->getDias(),
         ]);
@@ -38,7 +40,9 @@ class TreinoDAO {
         $result = [];
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $result[$row['descricao']] = new Treino(
+            $result[$row['id_treino']] = new Treino(
+                $row['id_treino'],
+                $row['nome_treino'],
                 $row['descricao'],
                 $row['dias']
             );
@@ -47,29 +51,48 @@ class TreinoDAO {
     }
 
     // UPDATE
-    public function atualizarTreino($descricaoOriginal, $novaDescricao, $dias) {
+    public function atualizarTreino($nome_treinoOriginal, $novoNome_treino, $descricao, $dias) {
         $stmt = $this->conn->prepare("
             UPDATE treino
-            SET descricao = :novaDescricao, dias = :dias
-            WHERE descricao = :descricaoOriginal
+            SET nome_treino = :novoNome_treino, descricao = :descricao, dias = :dias
+            WHERE nome_treino = :nome_treinoOriginal
         ");
         $stmt->execute([
-            ':novaDescricao' => $novaDescricao,
+            ':novoNome_treino' => $novoNome_treino,
+            ':descricao' => $descricao,
             ':dias' => $dias,
-            ':descricaoOriginal' => $descricaoOriginal,
+            ':nome_treinoOriginal' => $nome_treinoOriginal,
         ]);
     }
 
     // DELETE
-    public function deletarTreino($descricao) {
+    public function deletarTreino($nome_treino) {
         $stmt = $this->conn->prepare("
             DELETE FROM treino
-            WHERE descricao = :descricao
+            WHERE nome_treino = :nome_treino
         ");
         $stmt->execute([
-            ':descricao' => $descricao,
+            ':nome_treino' => $nome_treino,
         ]);
     }
-}   
+
+    // Buscar treino por nome
+    public function buscarTreino($nome_treino) {
+        $stmt = $this->conn->prepare('SELECT * FROM treino WHERE nome_treino = :nome_treino');
+        $stmt->execute([':nome_treino' => $nome_treino]);
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($row) {
+            return new Treino(
+                $row['id_treino'],
+                $row['nome_treino'],
+                $row['descricao'],
+                $row['dias']
+            );
+        } else {
+            return null; // Retorna null se o treino não for encontrado
+        }
+    }
+}
 
 ?>

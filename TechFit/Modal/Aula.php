@@ -1,9 +1,11 @@
 <?php 
 class Aula {
+    private $id_aula;
     private $modalidade;
     private $data_hora;
 
-    public function __construct($modalidade, $data_hora) {
+    public function __construct($id_aula, $modalidade, $data_hora) {
+        $this->id_aula = $id_aula;
         $this->modalidade = $modalidade;
         $this->data_hora = $data_hora;
     }

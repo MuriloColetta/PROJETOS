@@ -1,5 +1,6 @@
 <?php
 class Cliente {
+    private $id_cliente;
     private $nome_cliente;
     private $cpf_cliente;
     private $data_nascimento;
@@ -7,7 +8,8 @@ class Cliente {
     private $telefone_cliente;
     private $senha_cliente;
 
-    public function __construct($nome_cliente, $cpf_cliente, $data_nascimento, $email_cliente, $telefone_cliente, $senha_cliente) {
+    public function __construct($id_cliente, $nome_cliente, $cpf_cliente, $data_nascimento, $email_cliente, $telefone_cliente, $senha_cliente) {
+        $this->id_cliente = $id_cliente;
         $this->nome_cliente = $nome_cliente;
         $this->cpf_cliente = $cpf_cliente;
         $this->data_nascimento = $data_nascimento;

@@ -49,7 +49,8 @@ class FuncionarioDAO {
         $result = [];
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $result[$row['nome_funcionario']] = new Funcionario(
+            $result[$row['id_funcionario']] = new Funcionario(
+                $row['id_funcionario'],
                 $row['nome_funcionario'],
                 $row['cpf_funcionario'],
                 $row['cargo'],
@@ -92,13 +93,14 @@ class FuncionarioDAO {
     }
 
     // BUSCAR POR NOME FUNCIONARIO
-    public function buscarPorNomeFuncionario($nome_funcionario) {
+    public function buscarFuncionario($nome_funcionario) {
         $stmt = $this->conn->prepare("SELECT * FROM funcionario WHERE nome_funcionario = :nome_funcionario");
         $stmt->execute([':nome_funcionario' => $nome_funcionario]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
             return new Funcionario(
+                $row['id_funcionario'],
                 $row['nome_funcionario'],
                 $row['cpf_funcionario'],
                 $row['cargo'],

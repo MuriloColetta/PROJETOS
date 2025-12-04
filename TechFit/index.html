@@ -150,7 +150,7 @@
                     <h3>Agendar aula</h3>
                     <input type="text" name="nome_cliente" id="nome_cliente" placeholder="Nome:">
                     <select name="modalidade" id="modalidade">
-                        <option value="" selected>Modalidade</option>
+                        <option value="" disabled selected>Modalidade</option>
                         <option value="capoeira">Capoeira</option>
                         <option value="zumba">Zumba</option>
                         <option value="sanda">Sanda</option>
@@ -158,7 +158,7 @@
                         <option value="muaythai">Muay Thai</option>
                     </select>
                     <select name="horario" id="horario">
-                        <option value="" selected>Horário</option>
+                        <option value="" disabled selected>Horário</option>
                     </select>
                     <button onclick="agendarAula()">Agendar</button>
                 </form>
@@ -218,6 +218,8 @@
                 <form action="agendar-avaliacao" method="POS">
                     <h3>Agendar Avaliação</h3>
                     <input type="text" name="nome_cliente" id="nome_cliente" placeholder="Nome:">
+                    <input type="text" name="peso_cliente" id="peso_cliente" placeholder="Peso (kg):">
+                    <input type="text" name="altura_cliente" id="altura_cliente" placeholder="Altura (m):">
                     <input type="date" name="data_avaliacao" id="data_avaliacao">
                     <button onclick="agendarAvaliacao()">Agendar Avaliação</button>
                 </form>

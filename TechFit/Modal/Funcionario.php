@@ -1,5 +1,6 @@
 <?php
 class Funcionario {
+    private $id_funcionario;
     private $nome_funcionario;
     private $cpf_funcionario;
     private $cargo;
@@ -9,7 +10,8 @@ class Funcionario {
     private $telefone_funcionario;
     private $senha_funcionario;
 
-    public function __construct($nome_funcionario, $cpf_funcionario, $cargo, $salario, $carga_horaria, $email_funcionario, $telefone_funcionario, $senha_funcionario) {
+    public function __construct($id_funcionario, $nome_funcionario, $cpf_funcionario, $cargo, $salario, $carga_horaria, $email_funcionario, $telefone_funcionario, $senha_funcionario) {
+        $this->id_funcionario = $id_funcionario;
         $this->nome_funcionario = $nome_funcionario;
         $this->cpf_funcionario = $cpf_funcionario;
         $this->cargo = $cargo;

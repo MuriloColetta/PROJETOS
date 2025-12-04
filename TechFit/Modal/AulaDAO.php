@@ -35,7 +35,8 @@ class AulaDAO {
         $result = [];
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            $result[$row['modalidade']] = new Aula(
+            $result[$row['id_aula']] = new Aula(
+                $row['id_aula'],
                 $row['modalidade'],
                 $row['data_hora']
             );
@@ -67,13 +68,14 @@ class AulaDAO {
     }
 
     // BUSCAR POR MODALIDADE
-    public function buscarPorModalidade($modalidade) {
+    public function buscarAula($modalidade) {
         $stmt = $this->conn->prepare("SELECT * FROM aula WHERE modalidade = :modalidade");
         $stmt->execute([':modalidade' => $modalidade]);
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($row) {
             return new Aula(
+                $row['id_aula'],
                 $row['modalidade'],
                 $row['data_hora']
             );
