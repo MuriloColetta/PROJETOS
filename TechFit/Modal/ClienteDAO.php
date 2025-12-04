@@ -14,7 +14,7 @@ class ClienteDAO {
                 id_cliente INT AUTO_INCREMENT PRIMARY KEY,
                 nome_cliente VARCHAR(50) NOT NULL,
                 cpf_cliente VARCHAR(14) NOT NULL,
-                data_nascimento DATA NOT NULL,
+                data_nascimento DATE NOT NULL,
                 email_cliente VARCHAR(100) NOT NULL,telefone_cliente VARCHAR(15) NOT NULL,
                 senha_cliente VARCHAR(255) NOT NULL
             )
@@ -103,6 +103,23 @@ class ClienteDAO {
         }
         return null;
     }
-}
 
+    // LOGIN – AUTENTICAÇÃO
+        public function autenticar($nome_cliente, $senha) {
+        $stmt = $this->conn->prepare("
+            SELECT * FROM cliente WHERE nome_cliente = :nome_cliente LIMIT 1
+        ");
+        $stmt->bindParam(':nome_cliente', $nome_cliente);
+        $stmt->execute();
+
+        $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Comparação simples SEM hash
+        if ($cliente && $senha === $cliente['senha_cliente']) {
+            return $cliente;
+        }
+
+        return false;
+    }
+}
 ?>

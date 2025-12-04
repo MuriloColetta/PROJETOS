@@ -113,6 +113,24 @@ class FuncionarioDAO {
         }
         return null;
     }
+
+    // LOGIN – AUTENTICAÇÃO
+    public function autenticar($nome_funcionario, $senha) {
+        $stmt = $this->conn->prepare("
+            SELECT * FROM funcionario WHERE nome_funcionario = :nome_funcionario LIMIT 1
+        ");
+        $stmt->bindParam(':nome_funcionario', $nome_funcionario);
+        $stmt->execute();
+
+        $funcionario = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        // Comparação simples (sem criptografia)
+        if ($funcionario && $senha === $funcionario['senha_funcionario']) {
+            return $funcionario;
+        }
+
+        return false;
+    }
 }
 
 ?>
