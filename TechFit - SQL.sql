@@ -142,3 +142,9 @@ ADD CONSTRAINT fk_acesso_filiais FOREIGN KEY (id_filiais) REFERENCES filiais(id_
 ALTER TABLE agendamento
 ADD CONSTRAINT fk_agendamento_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
 ADD CONSTRAINT fk_agendamento_aula FOREIGN KEY (id_aula) REFERENCES aula(id_aula);
+
+insert into funcionario (nome_funcionario, cpf_funcionario, cargo, salario, carga_horaria, email_funcionario, telefone_funcionario, senha_funcionario) values
+("admin", "987.654.321-00", "Gerente", 5000.00, 8, "admin@techfit.com", "(19) 98888-7777", "admin123");
+
+select * from cliente;
+select * from funcionario;
