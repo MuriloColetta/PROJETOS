@@ -136,6 +136,8 @@ class Controller {
   }
 
   // ========== AGENDAMENTOS DE AULAS ==========
+  static agendamentoEditandoId = null;
+
   static async carregarAgendamentosAulas() {
     try {
       const agendamentos = await Model.getAgendamentosAulas();
@@ -145,17 +147,22 @@ class Controller {
     }
   }
 
-  static async editarAgendamentoAula(index) {
+  static async editarAgendamentoAula(id) {
     try {
-      const agendamento = await Model.getAgendamentoAulaByIndex(index);
+      const agendamentos = await Model.getAgendamentosAulas();
+      const agendamento = agendamentos.find(a => a.id_agendamento == id);
       if (agendamento) {
-        // Converter formato do banco para formato da view
-        const agendamentoFormatado = {
-          nome: agendamento.nome_cliente || agendamento.nome,
-          modalidade: agendamento.modalidade,
-          horario: agendamento.horario
-        };
-        View.mostrarModalEdicaoAula(agendamentoFormatado, index);
+        document.getElementById("nome-agendamento-aula").value = agendamento.nome_cliente || agendamento.nome;
+        document.getElementById("modalidade-agendamento-aula").value = agendamento.modalidade || '';
+        document.getElementById("horario-agendamento-aula").value = agendamento.horario || '';
+        document.getElementById("data-agendamento-aula").value = agendamento.data_agendamento || '';
+        
+        const button = document.querySelector('#form-cadastro-agendamento-aula button[type="submit"]');
+        button.dataset.modo = 'editar';
+        button.textContent = 'Atualizar';
+        this.agendamentoEditandoId = id;
+        
+        document.getElementById("form-cadastro-agendamento-aula").scrollIntoView({ behavior: 'smooth' });
       } else {
         Notification.error("Agendamento não encontrado!");
       }
@@ -164,40 +171,11 @@ class Controller {
     }
   }
 
-  static async salvarEdicaoAula(index) {
-    const nome = document.getElementById("edit-nome-aula").value.trim();
-    const modalidade = document.getElementById("edit-modalidade-aula").value.trim();
-    const horario = document.getElementById("edit-horario-aula").value.trim();
-
-    if (!nome || !modalidade || !horario) {
-      Notification.error("Por favor, preencha todos os campos!");
-      return;
-    }
-
-    try {
-      await Model.updateAgendamentoAula(index, {
-        nome,
-        modalidade,
-        horario
-      });
-
-      Notification.success("Agendamento atualizado com sucesso!");
-      await this.carregarAgendamentosAulas();
-      const modalElement = document.getElementById('modalEditarAula');
-      if (modalElement && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-        const modal = bootstrap.Modal.getInstance(modalElement);
-        if (modal) modal.hide();
-      }
-    } catch (error) {
-      Notification.error("Erro ao atualizar agendamento: " + error.message);
-    }
-  }
-
-  static async excluirAgendamentoAula(index) {
+  static async excluirAgendamentoAula(id) {
     if (!confirm("Tem certeza que deseja excluir este agendamento?")) return;
 
     try {
-      const sucesso = await Model.deleteAgendamentoAula(index);
+      const sucesso = await Model.deleteAgendamentoAula(id);
       if (sucesso) {
         Notification.success("Agendamento excluído com sucesso!");
         await this.carregarAgendamentosAulas();
@@ -242,6 +220,8 @@ class Controller {
   }
 
   // ========== AVALIAÇÕES ==========
+  static avaliacaoEditandoId = null;
+
   static async carregarAvaliacoes() {
     try {
       const avaliacoes = await Model.getAgendamentosAvaliacoes();
@@ -251,18 +231,23 @@ class Controller {
     }
   }
 
-  static async editarAvaliacao(index) {
+  static async editarAvaliacao(id) {
     try {
-      const avaliacao = await Model.getAgendamentoAvaliacaoByIndex(index);
+      const avaliacoes = await Model.getAgendamentosAvaliacoes();
+      const avaliacao = avaliacoes.find(a => a.id_avaliacao == id);
       if (avaliacao) {
-        // Converter formato do banco para formato da view
-        const avaliacaoFormatada = {
-          nome: avaliacao.nome_cliente || avaliacao.nome,
-          peso: avaliacao.peso || avaliacao.peso_cliente,
-          altura: avaliacao.altura || avaliacao.altura_cliente,
-          dataAvaliacao: avaliacao.data_avaliacao || avaliacao.dataAvaliacao
-        };
-        View.mostrarModalEdicaoAvaliacao(avaliacaoFormatada, index);
+        document.getElementById("nome-avaliacao-admin").value = avaliacao.nome_cliente || avaliacao.nome;
+        document.getElementById("peso-avaliacao-admin").value = avaliacao.peso_cliente || avaliacao.peso || '';
+        document.getElementById("altura-avaliacao-admin").value = avaliacao.altura_cliente || avaliacao.altura || '';
+        document.getElementById("data-agendamento-avaliacao-admin").value = avaliacao.data_agendamento || '';
+        document.getElementById("data-avaliacao-admin").value = avaliacao.data_avaliacao || '';
+        
+        const button = document.querySelector('#form-cadastro-avaliacao button[type="submit"]');
+        button.dataset.modo = 'editar';
+        button.textContent = 'Atualizar';
+        this.avaliacaoEditandoId = id;
+        
+        document.getElementById("form-cadastro-avaliacao").scrollIntoView({ behavior: 'smooth' });
       } else {
         Notification.error("Avaliação não encontrada!");
       }
@@ -271,42 +256,11 @@ class Controller {
     }
   }
 
-  static async salvarEdicaoAvaliacao(index) {
-    const nome = document.getElementById("edit-nome-avaliacao").value.trim();
-    const peso = document.getElementById("edit-peso-avaliacao").value.trim();
-    const altura = document.getElementById("edit-altura-avaliacao").value.trim();
-    const dataAvaliacao = document.getElementById("edit-data-avaliacao").value;
-
-    if (!nome || !peso || !altura || !dataAvaliacao) {
-      Notification.error("Por favor, preencha todos os campos!");
-      return;
-    }
-
-    try {
-      await Model.updateAgendamentoAvaliacao(index, {
-        nome,
-        peso,
-        altura,
-        dataAvaliacao
-      });
-
-      Notification.success("Avaliação atualizada com sucesso!");
-      await this.carregarAvaliacoes();
-      const modalElement = document.getElementById('modalEditarAvaliacao');
-      if (modalElement && typeof bootstrap !== 'undefined' && bootstrap.Modal) {
-        const modal = bootstrap.Modal.getInstance(modalElement);
-        if (modal) modal.hide();
-      }
-    } catch (error) {
-      Notification.error("Erro ao atualizar avaliação: " + error.message);
-    }
-  }
-
-  static async excluirAvaliacao(index) {
+  static async excluirAvaliacao(id) {
     if (!confirm("Tem certeza que deseja excluir esta avaliação?")) return;
 
     try {
-      const sucesso = await Model.deleteAgendamentoAvaliacao(index);
+      const sucesso = await Model.deleteAgendamentoAvaliacao(id);
       if (sucesso) {
         Notification.success("Avaliação excluída com sucesso!");
         await this.carregarAvaliacoes();
@@ -475,25 +429,40 @@ class Controller {
       return;
     }
 
-    try {
-      await Model.addAgendamentoAula({
-        tipo: "Aula",
-        nome,
-        modalidade,
-        horario,
-        data: new Date().toISOString().slice(0, 19).replace('T', ' ')
-      });
+    const button = document.querySelector('#form-cadastro-agendamento-aula button[type="submit"]');
+    const modo = button.dataset.modo;
 
-      Notification.success("Agendamento de aula cadastrado com sucesso!");
-      
-      // Limpar formulário
-      document.getElementById("nome-agendamento-aula").value = '';
-      document.getElementById("modalidade-agendamento-aula").value = '';
-      document.getElementById("horario-agendamento-aula").value = '';
-      
-      await this.carregarAgendamentosAulas();
+    try {
+      if (modo === 'editar' && this.agendamentoEditandoId) {
+        // Atualizar agendamento
+        await Model.updateAgendamentoAula(this.agendamentoEditandoId, {
+          nome,
+          modalidade,
+          horario
+        });
+
+        Notification.success("Agendamento atualizado com sucesso!");
+        document.getElementById("form-cadastro-agendamento-aula").reset();
+        button.textContent = 'Cadastrar';
+        button.dataset.modo = 'cadastrar';
+        this.agendamentoEditandoId = null;
+        await this.carregarAgendamentosAulas();
+      } else {
+        // Cadastrar novo agendamento
+        await Model.addAgendamentoAula({
+          tipo: "Aula",
+          nome,
+          modalidade,
+          horario,
+          data: new Date().toISOString().slice(0, 19).replace('T', ' ')
+        });
+
+        Notification.success("Agendamento de aula cadastrado com sucesso!");
+        document.getElementById("form-cadastro-agendamento-aula").reset();
+        await this.carregarAgendamentosAulas();
+      }
     } catch (error) {
-      Notification.error("Erro ao cadastrar agendamento: " + error.message);
+      Notification.error("Erro: " + error.message);
     }
   }
 
@@ -502,34 +471,51 @@ class Controller {
     const nome = document.getElementById("nome-avaliacao-admin").value.trim();
     const peso = document.getElementById("peso-avaliacao-admin").value.trim();
     const altura = document.getElementById("altura-avaliacao-admin").value.trim();
+    const dataAgendamento = document.getElementById("data-agendamento-avaliacao-admin").value;
     const dataAvaliacao = document.getElementById("data-avaliacao-admin").value;
 
-    if (!nome || !peso || !altura || !dataAvaliacao) {
+    if (!nome || !peso || !altura || !dataAgendamento || !dataAvaliacao) {
       Notification.error("Por favor, preencha todos os campos!");
       return;
     }
 
-    try {
-      await Model.addAvaliacao({
-        tipo: "Avaliação",
-        nome,
-        peso,
-        altura,
-        dataAvaliacao,
-        data: new Date().toISOString().slice(0, 19).replace('T', ' ')
-      });
+    const button = document.querySelector('#form-cadastro-avaliacao button[type="submit"]');
+    const modo = button.dataset.modo;
 
-      Notification.success("Avaliação cadastrada com sucesso!");
-      
-      // Limpar formulário
-      document.getElementById("nome-avaliacao-admin").value = '';
-      document.getElementById("peso-avaliacao-admin").value = '';
-      document.getElementById("altura-avaliacao-admin").value = '';
-      document.getElementById("data-avaliacao-admin").value = '';
-      
-      await this.carregarAvaliacoes();
+    try {
+      if (modo === 'editar' && this.avaliacaoEditandoId) {
+        // Atualizar avaliação
+        await Model.updateAgendamentoAvaliacao(this.avaliacaoEditandoId, {
+          nome,
+          peso,
+          altura,
+          data: dataAgendamento,
+          dataAvaliacao
+        });
+
+        Notification.success("Avaliação atualizada com sucesso!");
+        document.getElementById("form-cadastro-avaliacao").reset();
+        button.textContent = 'Cadastrar';
+        button.dataset.modo = 'cadastrar';
+        this.avaliacaoEditandoId = null;
+        await this.carregarAvaliacoes();
+      } else {
+        // Cadastrar nova avaliação
+        await Model.addAvaliacao({
+          tipo: "Avaliação",
+          nome,
+          peso,
+          altura,
+          data: dataAgendamento,
+          dataAvaliacao
+        });
+
+        Notification.success("Avaliação cadastrada com sucesso!");
+        document.getElementById("form-cadastro-avaliacao").reset();
+        await this.carregarAvaliacoes();
+      }
     } catch (error) {
-      Notification.error("Erro ao cadastrar avaliação: " + error.message);
+      Notification.error("Erro: " + error.message);
     }
   }
 }

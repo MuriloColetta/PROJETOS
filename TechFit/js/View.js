@@ -87,8 +87,8 @@ class View {
           <td>${data}</td>
           <td>Agendado</td>
           <td>
-            <button class="btn btn-sm btn-warning" onclick="Controller.editarAgendamentoAula(${index})">Editar</button>
-            <button class="btn btn-sm btn-danger" onclick="Controller.excluirAgendamentoAula(${index})">Excluir</button>
+            <button class="btn btn-sm btn-warning" onclick="Controller.editarAgendamentoAula(${agendamento.id_agendamento})">Editar</button>
+            <button class="btn btn-sm btn-danger" onclick="Controller.excluirAgendamentoAula(${agendamento.id_agendamento})">Excluir</button>
           </td>
         `;
         tbody.appendChild(tr);
@@ -179,8 +179,8 @@ class View {
           <td>${dataAgendamento}</td>
           <td>${dataAvalFormatada}</td>
           <td>
-            <button class="btn btn-sm btn-warning" onclick="Controller.editarAvaliacao(${index})">Editar</button>
-            <button class="btn btn-sm btn-danger" onclick="Controller.excluirAvaliacao(${index})">Excluir</button>
+            <button class="btn btn-sm btn-warning" onclick="Controller.editarAvaliacao(${avaliacao.id_avaliacao})">Editar</button>
+            <button class="btn btn-sm btn-danger" onclick="Controller.excluirAvaliacao(${avaliacao.id_avaliacao})">Excluir</button>
           </td>
         `;
         tbody.appendChild(tr);

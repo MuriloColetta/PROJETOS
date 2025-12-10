@@ -7,66 +7,65 @@ class AvaliacaoFisicaDAO {
     public function __construct() {
         $this->conn = Connection::getInstance();
 
-        // Garante existência da tabela para avaliações do index.html
-        $this->conn->exec("
-            CREATE TABLE IF NOT EXISTS avaliacao_fisica_site (
-                id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
-                tipo VARCHAR(20) NOT NULL DEFAULT 'Avaliação',
-                nome_cliente VARCHAR(100) NOT NULL,
-                peso DECIMAL(5,2),
-                altura DECIMAL(4,2),
-                data_avaliacao DATE,
-                data_agendamento DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
-        ");
+        // Garante existência da tabela `avaliacao_fisica` conforme seu schema
+        $sql = <<<'SQL'
+CREATE TABLE IF NOT EXISTS avaliacao_fisica (
+    id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
+    nome_cliente VARCHAR(100) NOT NULL,
+    peso_cliente DECIMAL(5,2) NOT NULL,
+    altura_cliente DECIMAL(4,2) NOT NULL,
+    status_agendamento VARCHAR(50) DEFAULT 'Agendado',
+    data_avaliacao DATE NOT NULL
+)
+SQL;
+        $this->conn->exec($sql);
     }
 
     // CREATE
     public function criarAvaliacao($dados) {
         try {
-            $stmt = $this->conn->prepare("
-                INSERT INTO avaliacao_fisica_site (tipo, nome_cliente, peso, altura, data_avaliacao, data_agendamento)
-                VALUES (:tipo, :nome_cliente, :peso, :altura, :data_avaliacao, :data_agendamento)
-            ");
-            
-            // Converter data para formato MySQL se necessário
-            $dataAgendamento = date('Y-m-d H:i:s');
-            if (isset($dados['data']) && !empty($dados['data'])) {
-                $dataFornecida = trim($dados['data']);
-                // Se a data vier no formato ISO (YYYY-MM-DD HH:MM:SS), usar diretamente
-                if (preg_match('/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}$/', $dataFornecida)) {
-                    $dataAgendamento = $dataFornecida;
-                } elseif (preg_match('/^\d{4}-\d{2}-\d{2}$/', $dataFornecida)) {
-                    // Se for apenas data, adicionar hora atual
-                    $dataAgendamento = $dataFornecida . ' ' . date('H:i:s');
+            $stmt = $this->conn->prepare(<<<'SQL'
+INSERT INTO avaliacao_fisica (nome_cliente, peso_cliente, altura_cliente, status_agendamento, data_avaliacao)
+VALUES (:nome_cliente, :peso_cliente, :altura_cliente, :status_agendamento, :data_avaliacao)
+SQL
+            );
+
+            // Preparar datas no formato YYYY-MM-DD - data_avaliacao é obrigatória
+            $dataAvaliacao = date('Y-m-d');
+            if (isset($dados['dataAvaliacao']) && !empty(trim($dados['dataAvaliacao']))) {
+                $d2 = trim($dados['dataAvaliacao']);
+                if (preg_match('/^\d{4}-\d{2}-\d{2}/', $d2)) {
+                    $dataAvaliacao = substr($d2,0,10);
+                } else {
+                    $ts2 = strtotime($d2);
+                    if ($ts2 !== false) $dataAvaliacao = date('Y-m-d', $ts2);
                 }
             }
-            
+
             // Validar nome obrigatório
             if (!isset($dados['nome']) || empty(trim($dados['nome']))) {
                 throw new Exception("Nome do cliente é obrigatório");
             }
-            
-            // Converter peso e altura para float, se necessário
+
+            // Converter peso e altura para float
             $peso = null;
             if (isset($dados['peso']) && $dados['peso'] !== '' && $dados['peso'] !== null) {
                 $pesoStr = is_string($dados['peso']) ? str_replace(',', '.', trim($dados['peso'])) : $dados['peso'];
                 $peso = is_numeric($pesoStr) ? floatval($pesoStr) : null;
             }
-            
+
             $altura = null;
             if (isset($dados['altura']) && $dados['altura'] !== '' && $dados['altura'] !== null) {
                 $alturaStr = is_string($dados['altura']) ? str_replace(',', '.', trim($dados['altura'])) : $dados['altura'];
                 $altura = is_numeric($alturaStr) ? floatval($alturaStr) : null;
             }
-            
+
             $stmt->execute([
-                ':tipo' => $dados['tipo'] ?? 'Avaliação',
                 ':nome_cliente' => trim($dados['nome']),
-                ':peso' => $peso,
-                ':altura' => $altura,
-                ':data_avaliacao' => !empty($dados['dataAvaliacao']) ? $dados['dataAvaliacao'] : null,
-                ':data_agendamento' => $dataAgendamento
+                ':peso_cliente' => $peso,
+                ':altura_cliente' => $altura,
+                ':status_agendamento' => $dados['status'] ?? 'Agendado',
+                ':data_avaliacao' => $dataAvaliacao
             ]);
             return $this->conn->lastInsertId();
         } catch (PDOException $e) {
@@ -76,37 +75,39 @@ class AvaliacaoFisicaDAO {
 
     // READ
     public function lerAvaliacoes() {
-        $stmt = $this->conn->query("SELECT * FROM avaliacao_fisica_site WHERE tipo = 'Avaliação' ORDER BY id_avaliacao DESC");
+        $stmt = $this->conn->query("SELECT * FROM avaliacao_fisica ORDER BY id_avaliacao DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // UPDATE
     public function atualizarAvaliacao($id, $dados) {
-        $stmt = $this->conn->prepare("
-            UPDATE avaliacao_fisica_site
-            SET nome_cliente = :nome, peso = :peso, altura = :altura, data_avaliacao = :data_avaliacao
-            WHERE id_avaliacao = :id
-        ");
+        $stmt = $this->conn->prepare(<<<'SQL'
+UPDATE avaliacao_fisica
+SET nome_cliente = :nome, peso_cliente = :peso, altura_cliente = :altura, status_agendamento = :status, data_avaliacao = :data_avaliacao
+WHERE id_avaliacao = :id
+SQL
+        );
         $stmt->execute([
             ':id' => $id,
-            ':nome' => $dados['nome'],
-            ':peso' => $dados['peso'],
-            ':altura' => $dados['altura'],
-            ':data_avaliacao' => $dados['dataAvaliacao']
+            ':nome' => $dados['nome'] ?? '',
+            ':peso' => isset($dados['peso']) ? $dados['peso'] : null,
+            ':altura' => isset($dados['altura']) ? $dados['altura'] : null,
+            ':status' => $dados['status'] ?? 'Agendado',
+            ':data_avaliacao' => isset($dados['dataAvaliacao']) ? (substr($dados['dataAvaliacao'],0,10)) : date('Y-m-d')
         ]);
         return $stmt->rowCount() > 0;
     }
 
     // DELETE
     public function deletarAvaliacao($id) {
-        $stmt = $this->conn->prepare("DELETE FROM avaliacao_fisica_site WHERE id_avaliacao = :id");
+        $stmt = $this->conn->prepare("DELETE FROM avaliacao_fisica WHERE id_avaliacao = :id");
         $stmt->execute([':id' => $id]);
         return $stmt->rowCount() > 0;
     }
 
     // BUSCAR POR ID
     public function buscarAvaliacao($id) {
-        $stmt = $this->conn->prepare("SELECT * FROM avaliacao_fisica_site WHERE id_avaliacao = :id");
+        $stmt = $this->conn->prepare("SELECT * FROM avaliacao_fisica WHERE id_avaliacao = :id");
         $stmt->execute([':id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }

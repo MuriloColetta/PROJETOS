@@ -103,11 +103,23 @@ class Model {
     }
   }
 
-  static async updateAgendamentoAula(index, dadosAtualizados) {
+  static async updateAgendamentoAula(idOrIndex, dadosAtualizados) {
     try {
       const aulas = await this.getAgendamentosAulas();
-      const aula = aulas[index];
       
+      // Primeiro tente localizar por id (mais robusto)
+      const idStr = String(idOrIndex);
+      let index = aulas.findIndex(a => String(a.id_agendamento) === idStr);
+
+      // Se não encontrar por id, e for um número válido, trate como index
+      if (index === -1) {
+        const maybeIndex = Number(idOrIndex);
+        if (!Number.isNaN(maybeIndex) && maybeIndex >= 0 && maybeIndex < aulas.length) {
+          index = maybeIndex;
+        }
+      }
+
+      const aula = aulas[index];
       if (!aula || !aula.id_agendamento) {
         throw new Error('Agendamento não encontrado');
       }
@@ -121,11 +133,21 @@ class Model {
     }
   }
 
-  static async deleteAgendamentoAula(index) {
+  static async deleteAgendamentoAula(idOrIndex) {
     try {
       const aulas = await this.getAgendamentosAulas();
-      const aula = aulas[index];
       
+      const idStr = String(idOrIndex);
+      let index = aulas.findIndex(a => String(a.id_agendamento) === idStr);
+
+      if (index === -1) {
+        const maybeIndex = Number(idOrIndex);
+        if (!Number.isNaN(maybeIndex) && maybeIndex >= 0 && maybeIndex < aulas.length) {
+          index = maybeIndex;
+        }
+      }
+
+      const aula = aulas[index];
       if (!aula || !aula.id_agendamento) {
         throw new Error('Agendamento não encontrado');
       }
@@ -159,11 +181,21 @@ class Model {
     }
   }
 
-  static async updateAgendamentoAvaliacao(index, dadosAtualizados) {
+  static async updateAgendamentoAvaliacao(idOrIndex, dadosAtualizados) {
     try {
       const avaliacoes = await this.getAgendamentosAvaliacoes();
-      const avaliacao = avaliacoes[index];
       
+      const idStr = String(idOrIndex);
+      let index = avaliacoes.findIndex(a => String(a.id_avaliacao) === idStr);
+
+      if (index === -1) {
+        const maybeIndex = Number(idOrIndex);
+        if (!Number.isNaN(maybeIndex) && maybeIndex >= 0 && maybeIndex < avaliacoes.length) {
+          index = maybeIndex;
+        }
+      }
+
+      const avaliacao = avaliacoes[index];
       if (!avaliacao || !avaliacao.id_avaliacao) {
         throw new Error('Avaliação não encontrada');
       }
@@ -177,11 +209,21 @@ class Model {
     }
   }
 
-  static async deleteAgendamentoAvaliacao(index) {
+  static async deleteAgendamentoAvaliacao(idOrIndex) {
     try {
       const avaliacoes = await this.getAgendamentosAvaliacoes();
-      const avaliacao = avaliacoes[index];
       
+      const idStr = String(idOrIndex);
+      let index = avaliacoes.findIndex(a => String(a.id_avaliacao) === idStr);
+
+      if (index === -1) {
+        const maybeIndex = Number(idOrIndex);
+        if (!Number.isNaN(maybeIndex) && maybeIndex >= 0 && maybeIndex < avaliacoes.length) {
+          index = maybeIndex;
+        }
+      }
+
+      const avaliacao = avaliacoes[index];
       if (!avaliacao || !avaliacao.id_avaliacao) {
         throw new Error('Avaliação não encontrada');
       }

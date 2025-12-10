@@ -59,12 +59,11 @@ CREATE TABLE treino (
 
 CREATE TABLE avaliacao_fisica (
     id_avaliacao INT AUTO_INCREMENT PRIMARY KEY,
-    id_cliente INT NOT NULL,
-    id_funcionario INT NOT NULL,
-    peso_cliente DECIMAL(5,2),
-    altura_cliente DECIMAL(4,2),
-    data_avaliacao DATE NOT NULL,
-    descricao VARCHAR(255)
+    nome_cliente VARCHAR(100) NOT NULL,
+    peso_cliente DECIMAL(5,2) NOT NULL,
+    altura_cliente DECIMAL(4,2) NOT NULL,
+    status_agendamento VARCHAR(50) DEFAULT "Agendado",
+    data_avaliacao DATE NOT NULL
 );
 
 CREATE TABLE assinatura (
@@ -106,14 +105,12 @@ CREATE TABLE acesso (
 
 CREATE TABLE agendamento (
     id_agendamento INT AUTO_INCREMENT PRIMARY KEY,
-    data_agendamento DATE NOT NULL,
-    id_cliente INT NOT NULL,
-    id_aula INT NOT NULL
+    nome_cliente VARCHAR(100) NOT NULL,
+    modalidade VARCHAR(50) NOT NULL,
+    horario VARCHAR(50) NOT NULL,
+    status_agendamento VARCHAR(50) DEFAULT "Agendado",
+    data_agendamento DATE NOT NULL
 );
-
-ALTER TABLE avaliacao_fisica
-ADD CONSTRAINT fk_avaliacao_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
-ADD CONSTRAINT fk_avaliacao_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario);
 
 ALTER TABLE assinatura
 ADD CONSTRAINT fk_assinatura_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
@@ -138,10 +135,6 @@ ADD CONSTRAINT fk_usa_treino FOREIGN KEY (id_treino) REFERENCES treino(id_treino
 ALTER TABLE acesso
 ADD CONSTRAINT fk_acesso_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
 ADD CONSTRAINT fk_acesso_filiais FOREIGN KEY (id_filiais) REFERENCES filiais(id_filiais);
-
-ALTER TABLE agendamento
-ADD CONSTRAINT fk_agendamento_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
-ADD CONSTRAINT fk_agendamento_aula FOREIGN KEY (id_aula) REFERENCES aula(id_aula);
 
 insert into funcionario (nome_funcionario, cpf_funcionario, cargo, salario, carga_horaria, email_funcionario, telefone_funcionario, senha_funcionario) values
 ("admin", "987.654.321-00", "Gerente", 5000.00, 8, "admin@techfit.com", "(19) 98888-7777", "admin123");

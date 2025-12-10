@@ -197,7 +197,7 @@ if (modalidadeSelect && horarioSelect) {
 
 // === Agendar Aula ===
 async function agendarAula() {
-    const nome = document.querySelector('.agendar-aula input[placeholder="Nome:"]');
+    const nome = document.getElementById("nome_cliente");
     const modalidade = document.getElementById("modalidade");
     const horario = document.getElementById("horario");
 
@@ -262,13 +262,13 @@ async function agendarAula() {
 }
 
 async function agendarAvaliacao() {
-    const nome = document.querySelector('.agendar-avaliacao input[placeholder="Nome:"]');
-    const peso = document.querySelector('.agendar-avaliacao input[placeholder="Peso (kg):"]');
-    const altura = document.querySelector('.agendar-avaliacao input[placeholder="Altura (m):"]');
-    const dataAvaliacao = document.getElementById("data_avaliacao");
+    const nome = document.getElementById("nome_avaliacao");
+    const peso = document.getElementById("peso_avaliacao");
+    const altura = document.getElementById("altura_avaliacao");
+    const dataAvaliacao = document.getElementById("data_avaliacao_form");
 
     if (!nome || !peso || !altura || !dataAvaliacao) {
-        Notification.error("Por favor, preencha todos os campos!");
+        Notification.error("Erro ao acessar os campos do formulário!");
         return;
     }
 
