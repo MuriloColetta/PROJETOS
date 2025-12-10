@@ -75,16 +75,33 @@ class View {
       return;
     }
     
+      // Helper: parse 'YYYY-MM-DD' or 'YYYY-MM-DD HH:MM:SS' into local Date (ignore timezone shift)
+      const parseToLocalDate = (s) => {
+        if (!s) return null;
+        // extrair parte YYYY-MM-DD
+        const m = String(s).match(/^(\d{4})-(\d{2})-(\d{2})/);
+        if (m) {
+          const y = parseInt(m[1], 10);
+          const mo = parseInt(m[2], 10) - 1;
+          const d = parseInt(m[3], 10);
+          return new Date(y, mo, d);
+        }
+        const dt = new Date(s);
+        return isNaN(dt) ? null : dt;
+      };
+
       agendamentos.forEach((agendamento, index) => {
         const tr = document.createElement("tr");
         const nome = agendamento.nome_cliente || agendamento.nome || '-';
-        const data = agendamento.data_agendamento || agendamento.data || '-';
+        const raw = agendamento.data_agendamento || agendamento.data || '';
+        const dateObj = parseToLocalDate(raw);
+        const dataFormatada = dateObj ? dateObj.toLocaleDateString('pt-BR') : (raw || '-');
         tr.innerHTML = `
           <td>${index + 1}</td>
           <td>${nome}</td>
           <td>${agendamento.modalidade || '-'}</td>
           <td>${agendamento.horario || '-'}</td>
-          <td>${data}</td>
+          <td>${dataFormatada}</td>
           <td>Agendado</td>
           <td>
             <button class="btn btn-sm btn-warning" onclick="Controller.editarAgendamentoAula(${agendamento.id_agendamento})">Editar</button>
@@ -163,20 +180,36 @@ class View {
       return;
     }
     
+      // Helper: retorna Date sem conversão UTC quando a entrada é somente YYYY-MM-DD
+      const parseYMDToLocalDate = (s) => {
+        if (!s) return null;
+        // formato "YYYY-MM-DD"
+        const m = s.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+        if (m) {
+          const y = parseInt(m[1], 10);
+          const mo = parseInt(m[2], 10) - 1;
+          const d = parseInt(m[3], 10);
+          return new Date(y, mo, d);
+        }
+        const dt = new Date(s);
+        return isNaN(dt) ? null : dt;
+      };
+
       avaliacoes.forEach((avaliacao, index) => {
         const tr = document.createElement("tr");
         const nome = avaliacao.nome_cliente || avaliacao.nome || '-';
         const peso = avaliacao.peso || avaliacao.peso_cliente || '-';
         const altura = avaliacao.altura || avaliacao.altura_cliente || '-';
-        const dataAval = avaliacao.data_avaliacao || avaliacao.dataAvaliacao;
-        const dataAvalFormatada = dataAval ? new Date(dataAval).toLocaleDateString('pt-BR') : '-';
-        const dataAgendamento = avaliacao.data_agendamento || avaliacao.data || '-';
+        const dataAval = avaliacao.data_avaliacao || avaliacao.dataAvaliacao || '';
+        const dataObj = parseYMDToLocalDate(dataAval);
+        const dataAvalFormatada = dataObj ? dataObj.toLocaleDateString('pt-BR') : '-';
+        const status = avaliacao.status_agendamento || avaliacao.status || '-';
         tr.innerHTML = `
           <td>${index + 1}</td>
           <td>${nome}</td>
           <td>${peso}</td>
           <td>${altura}</td>
-          <td>${dataAgendamento}</td>
+          <td>${status}</td>
           <td>${dataAvalFormatada}</td>
           <td>
             <button class="btn btn-sm btn-warning" onclick="Controller.editarAvaliacao(${avaliacao.id_avaliacao})">Editar</button>

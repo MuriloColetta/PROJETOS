@@ -114,7 +114,7 @@ CREATE TABLE agendamento (
 
 ALTER TABLE assinatura
 ADD CONSTRAINT fk_assinatura_cliente FOREIGN KEY (id_cliente) REFERENCES cliente(id_cliente),
-ADD CONSTRAINT fk_assinatura_treino FOREIGN KEY (id_plano) REFERENCES treino(id_plano);
+ADD CONSTRAINT fk_assinatura_plano FOREIGN KEY (id_plano) REFERENCES plano(id_plano);
 
 ALTER TABLE pertence
 ADD CONSTRAINT fk_pertence_funcionario FOREIGN KEY (id_funcionario) REFERENCES funcionario(id_funcionario),

@@ -155,7 +155,6 @@ class Controller {
         document.getElementById("nome-agendamento-aula").value = agendamento.nome_cliente || agendamento.nome;
         document.getElementById("modalidade-agendamento-aula").value = agendamento.modalidade || '';
         document.getElementById("horario-agendamento-aula").value = agendamento.horario || '';
-        document.getElementById("data-agendamento-aula").value = agendamento.data_agendamento || '';
         
         const button = document.querySelector('#form-cadastro-agendamento-aula button[type="submit"]');
         button.dataset.modo = 'editar';
@@ -239,7 +238,6 @@ class Controller {
         document.getElementById("nome-avaliacao-admin").value = avaliacao.nome_cliente || avaliacao.nome;
         document.getElementById("peso-avaliacao-admin").value = avaliacao.peso_cliente || avaliacao.peso || '';
         document.getElementById("altura-avaliacao-admin").value = avaliacao.altura_cliente || avaliacao.altura || '';
-        document.getElementById("data-agendamento-avaliacao-admin").value = avaliacao.data_agendamento || '';
         document.getElementById("data-avaliacao-admin").value = avaliacao.data_avaliacao || '';
         
         const button = document.querySelector('#form-cadastro-avaliacao button[type="submit"]');
@@ -448,13 +446,12 @@ class Controller {
         this.agendamentoEditandoId = null;
         await this.carregarAgendamentosAulas();
       } else {
-        // Cadastrar novo agendamento
+        // Cadastrar novo agendamento — não enviar campo de data, será gerado no servidor
         await Model.addAgendamentoAula({
           tipo: "Aula",
           nome,
           modalidade,
-          horario,
-          data: new Date().toISOString().slice(0, 19).replace('T', ' ')
+          horario
         });
 
         Notification.success("Agendamento de aula cadastrado com sucesso!");
@@ -471,10 +468,8 @@ class Controller {
     const nome = document.getElementById("nome-avaliacao-admin").value.trim();
     const peso = document.getElementById("peso-avaliacao-admin").value.trim();
     const altura = document.getElementById("altura-avaliacao-admin").value.trim();
-    const dataAgendamento = document.getElementById("data-agendamento-avaliacao-admin").value;
     const dataAvaliacao = document.getElementById("data-avaliacao-admin").value;
-
-    if (!nome || !peso || !altura || !dataAgendamento || !dataAvaliacao) {
+    if (!nome || !peso || !altura || !dataAvaliacao) {
       Notification.error("Por favor, preencha todos os campos!");
       return;
     }
@@ -484,12 +479,11 @@ class Controller {
 
     try {
       if (modo === 'editar' && this.avaliacaoEditandoId) {
-        // Atualizar avaliação
+        // Atualizar avaliação (não alterar data de agendamento)
         await Model.updateAgendamentoAvaliacao(this.avaliacaoEditandoId, {
           nome,
           peso,
           altura,
-          data: dataAgendamento,
           dataAvaliacao
         });
 
@@ -500,13 +494,12 @@ class Controller {
         this.avaliacaoEditandoId = null;
         await this.carregarAvaliacoes();
       } else {
-        // Cadastrar nova avaliação
+        // Cadastrar nova avaliação — enviar apenas data da avaliação
         await Model.addAvaliacao({
           tipo: "Avaliação",
           nome,
           peso,
           altura,
-          data: dataAgendamento,
           dataAvaliacao
         });
 

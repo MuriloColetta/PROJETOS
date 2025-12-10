@@ -400,9 +400,7 @@ table {
           <div class="col-md-3">
             <input type="text" id="horario-agendamento-aula" name="horario" placeholder="Horário" required>
           </div>
-          <div class="col-md-3">
-            <input type="date" id="data-agendamento-aula" name="data_agendamento" required>
-          </div>
+          <!-- data_agendamento é gerada automaticamente no servidor; campo removido -->
           <div class="col-md-2">
             <button type="submit" data-modo="cadastrar">Cadastrar</button>
           </div>
@@ -446,9 +444,7 @@ table {
           <div class="col-md-2">
             <input type="text" id="altura-avaliacao-admin" name="altura" placeholder="Altura (m)" required>
           </div>
-          <div class="col-md-2">
-            <input type="date" id="data-agendamento-avaliacao-admin" name="data_agendamento" required>
-          </div>
+          <!-- campo de data de agendamento removido; somente data da avaliação é necessária -->
           <div class="col-md-2">
             <input type="date" id="data-avaliacao-admin" name="data_avaliacao" required>
           </div>
@@ -471,7 +467,7 @@ table {
               <th>Nome Cliente</th>
               <th>Peso (kg)</th>
               <th>Altura (m)</th>
-              <th>Data Agendamento</th>
+              <th>Status</th>
               <th>Data Avaliação</th>
               <th>Ações</th>
             </tr>

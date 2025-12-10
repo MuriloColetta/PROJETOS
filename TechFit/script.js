@@ -220,8 +220,7 @@ async function agendarAula() {
             tipo: "Aula",
             nome: nomeValue,
             modalidade: modalidadeValue,
-            horario: horarioValue,
-            data: new Date().toISOString().slice(0, 19).replace('T', ' ')
+            horario: horarioValue
         };
 
         const response = await fetch('api/agendamentos.php', {
@@ -288,8 +287,7 @@ async function agendarAvaliacao() {
             nome: nomeValue,
             peso: pesoValue,
             altura: alturaValue,
-            dataAvaliacao: dataValue,
-            data: new Date().toISOString().slice(0, 19).replace('T', ' ')
+            dataAvaliacao: dataValue
         };
 
         const response = await fetch('api/avaliacoes.php', {
